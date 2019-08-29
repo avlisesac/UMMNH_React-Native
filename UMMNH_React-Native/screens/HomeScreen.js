@@ -1,14 +1,49 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements';
+import * as Font from 'expo-font';
+
 
 export default class HomeScreen extends React.Component {
-	//Navigation
+	static navigationOptions = {
+		title: "Home",
+		headerStyle: {
+			backgroundColor: '#00b6f1'
+		},
+		headerTitleStyle: {
+			color: '#00274c'
+		},
+		headerTintColor: '#00274c',
+		headerBackTitle: "Back",
+		headerBackTitleStyle: {
+			color: '#00274c'
+		}
+	}
 
-	//Render
-	render() {
-		return (
-      		<View style={styles.container}>
+  	async componentWillMount(){
+  	  try {
+  	    await Font.loadAsync({
+  	      'whitney-black' : require ('../assets/fonts/Whitney-Black.otf'),
+  	      'whitney-medium' : require ('../assets/fonts/Whitney-Medium.otf'),
+  	      'whitney-semibold' : require ('../assets/fonts/Whitney-Semibold.otf'),
+  	    });
+  	    this.setState({fontLoaded: true});
+
+  	  } catch (error) {
+  	    console.log('error loading fonts', error)
+  	  }
+  	}
+  	
+	state = {
+    	fontLoaded: false
+  	};
+
+  	render() {
+  	  if (!this.state.fontLoaded) {
+  	    return <Text>Loading...</Text>;
+  	  }
+  	  return (
+  	  	<View style={styles.container}>
     		  <StatusBar hidden />
     		  <ImageBackground style = { styles.backgroundImage } source = {require('../assets/img/home_background.png')}> 
     		    <View style = {styles.menuContainer}>
@@ -30,23 +65,36 @@ export default class HomeScreen extends React.Component {
       		        </View>
       		        <View style = {styles.buttonContainer}>
       		          <View style = {{paddingBottom: 10}}>
-      		            <Button title = "Tours" buttonStyle = {{backgroundColor: "#ffcb05"}} titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
+      		            <Button 
+      		            title = "Tours" 
+      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
       		          </View>
       		          <View style = {{paddingBottom: 10}}>
-      		            <Button title = "Today @ UMMNH" buttonStyle = {{backgroundColor: "#ffcb05"}} titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
+      		            <Button 
+      		            title = "Today @ UMMNH"
+      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
       		          </View>
       		          <View style = {{paddingBottom: 10}}>
-      		            <Button title = "Map" buttonStyle = {{backgroundColor: "#ffcb05"}} titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
+      		            <Button 
+      		            title = "Map" 
+      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
       		          </View>
       		          <View style = {{paddingBottom: 20}}>
-      		            <Button title = "About" buttonStyle = {{backgroundColor: "#ffcb05"}} titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
+      		            <Button 
+      		            title = "About" 
+      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
+      		            onPress = {() => this.props.navigation.navigate('About')}/>
       		          </View>
       		        </View>
       		      </View>
       		  </ImageBackground>
       		</View>
-		);
-	}
+  	  	);  
+  	}
 }
 
 const styles = StyleSheet.create({
