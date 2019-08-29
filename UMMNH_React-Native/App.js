@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native'
+import { View, Text } from 'react-native'
 import HomeScreen from './screens/HomeScreen';
 import * as Font from 'expo-font';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 
-export default class  App  extends React.Component {
+class  App  extends React.Component {
   state = {
     fontLoaded: false
   };
@@ -25,11 +26,16 @@ export default class  App  extends React.Component {
       return <Text>Loading...</Text>;
     }
     return (
-      console.log("presenting home screen..."),
-      console.log(" "),
       <HomeScreen />
     );  
   }
 }
 
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: App
+  }
+});
+
+export default createAppContainer(AppNavigator);
 
