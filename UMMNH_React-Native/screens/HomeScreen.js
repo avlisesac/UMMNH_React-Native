@@ -45,7 +45,7 @@ export default class HomeScreen extends React.Component {
   	  }
   	  return (
   	  	<View style={styles.container}>
-    		  <StatusBar hidden />
+    		  {/* <StatusBar hidden /> */}
     		  <ImageBackground style = { styles.backgroundImage } source = {require('../assets/img/home_background.png')}> 
     		    <View style = {styles.menuContainer}>
     		      <View style = {styles.welcomeMessage}>
@@ -69,25 +69,26 @@ export default class HomeScreen extends React.Component {
       		          <View style = {{paddingBottom: 10}}>
       		            <Button 
       		            title = "Tours" 
-      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
-      		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
+      		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
+      		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
+      		            onPress = { () => this.props.navigation.navigate('Tours')} />
       		          </View>
       		          <View style = {{paddingBottom: 10}}>
       		            <Button 
       		            title = "Today @ UMMNH"
-      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
       		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
       		          </View>
       		          <View style = {{paddingBottom: 10}}>
       		            <Button 
       		            title = "Map" 
-      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
       		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}/>
       		          </View>
       		          <View style = {{paddingBottom: 20}}>
       		            <Button 
       		            title = "About" 
-      		            buttonStyle = {{backgroundColor: "#ffcb05"}} 
+      		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
       		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
       		            onPress = {() => this.props.navigation.navigate('About')}/>
       		          </View>
