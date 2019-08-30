@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, Image } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import colors from '../utils/Colors'
+import fontSizes from '../utils/FontSizes'
 
 export default class HightlightsTourPreview extends React.Component {
 	static navigationOptions = {
@@ -32,7 +33,7 @@ export default class HightlightsTourPreview extends React.Component {
 								<Text style = { styles.subheaderText }>45 min.</Text>
 							</View>
 							<Text style = { styles.description }>
-								See the best that the Museum of Natural History has to offer! This tour will last approximately fourty-five minutes and show you our favorite features of this amazing new space. At each stop, you will get additional facts and informationi that we couldn't quite cram on to the placards. (Trust us, we tried.)
+								See the best that the Museum of Natural History has to offer! This tour will last approximately fourty-five minutes and show you our favorite features of this amazing new space. At each stop, you will get additional facts and information that we couldn't quite cram on to the placards. (Trust us, we tried.)
 							</Text>
 						</View>
 					</View>
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
 	header: {
 		color: colors.ummnhDarkBlue,
 		fontFamily: "whitney-black",
-		fontSize: 22
+		fontSize: fontSizes.headerSize
 	},
 	subheaderContainer: {
 		marginTop: 5,
