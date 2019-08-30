@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements';
+import colors from '../utils/Colors';
 import * as Font from 'expo-font';
 
 
@@ -8,15 +9,15 @@ export default class HomeScreen extends React.Component {
 	static navigationOptions = {
 		title: "Home",
 		headerStyle: {
-			backgroundColor: '#00b6f1'
+			backgroundColor: colors.ummnhLightBlue
 		},
 		headerTitleStyle: {
-			color: '#00274c'
+			color: colors.ummnhDarkBlue
 		},
-		headerTintColor: '#00274c',
+		headerTintColor: colors.ummnhDarkBlue,
 		headerBackTitle: "Back",
 		headerBackTitleStyle: {
-			color: '#00274c'
+			color: colors.ummnhDarkBlue
 		}
 	}
 
@@ -48,20 +49,21 @@ export default class HomeScreen extends React.Component {
     		  <ImageBackground style = { styles.backgroundImage } source = {require('../assets/img/home_background.png')}> 
     		    <View style = {styles.menuContainer}>
     		      <View style = {styles.welcomeMessage}>
-    		        <Text style = {[styles.ummnhLightBlue, styles.whitneyBlack, styles.welcomeBig]}>Welcome</Text>
-    		        <Text style = {[styles.ummnhLightBlue, styles.whitneyBlack, styles.welcomeSmall]}>to the brand new</Text>
-    		        <Text style = {[styles.ummnhLightBlue, styles.whitneyBlack, styles.welcomeMed]}>University of Michigan</Text>
-    		        <Text style = {[styles.ummnhLightBlue, styles.whitneyBlack, styles.welcomeBig]}>Museum of</Text>
-    		        <Text style = {[styles.ummnhLightBlue, styles.whitneyBlack, styles.welcomeBig]}>Natural History</Text>
+    		        <Text style = {styles.welcomeBig}>Welcome</Text>
+    		        <Text style = {styles.welcomeSmall}>to the brand new</Text>
+    		        <Text style = {styles.welcomeMed}>University of Michigan</Text>
+    		        <Text style = {styles.welcomeBig}>Museum of</Text>
+    		        <Text style = {styles.welcomeBig}>Natural History</Text>
   		
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyMedium]}>We celebrated our grand opening on</Text>
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyBlack]}>April 14th, 2019.</Text>
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyMedium]}>Please, enjoy your visit, and be sure to</Text>
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyBlack]}>come back in November</Text>
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyMedium]}>for our second grand opening.</Text>
-      		          <Text style = {styles.ummnhDarkBlue}> </Text>
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyMedium]}>There will be more to see, do, and</Text>
-      		          <Text style = {[styles.ummnhDarkBlue, styles.whitneyBlack]}>discover!</Text>
+      		          <Text style = {styles.copyReg}>We celebrated our grand opening on</Text>
+      		          <Text style = {styles.copyBold}>April 14th, 2019.</Text>
+      		          <View style = {styles.spacer}/>
+      		          <Text style = {styles.copyReg}>Please, enjoy your visit, and be sure to</Text>
+      		          <Text style = {styles.copyBold}>come back in November</Text>
+      		          <Text style = {styles.copyReg}>for our second grand opening.</Text>
+      		          <View style = {styles.spacer}/>
+      		          <Text style = {styles.copyReg}>There will be more to see, do, and</Text>
+      		          <Text style = {styles.copyBold}>discover!</Text>
       		        </View>
       		        <View style = {styles.buttonContainer}>
       		          <View style = {{paddingBottom: 10}}>
@@ -142,12 +144,29 @@ const styles = StyleSheet.create({
     fontFamily: "whitney-medium"
   },
   welcomeBig: {
-    fontSize: 36
+    fontSize: 36,
+    color: colors.ummnhLightBlue,
+    fontFamily: "whitney-black"
   },
   welcomeMed: {
-    fontSize: 32
+    fontSize: 32,
+    color: colors.ummnhLightBlue,
+    fontFamily: "whitney-black"
   },
   welcomeSmall: {
-    fontSize: 28
+    fontSize: 28,
+    color: colors.ummnhLightBlue,
+    fontFamily: "whitney-black"
   },
+  copyReg: {
+  	color: colors.ummnhDarkBlue,
+  	fontFamily: 'whitney-medium',
+  },
+  copyBold: {
+  	color: colors.ummnhDarkBlue,
+  	fontFamily: 'whitney-black'
+  },
+  spacer: {
+  	height: 10
+  }
 });

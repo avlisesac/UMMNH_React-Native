@@ -1,5 +1,10 @@
 import React from 'react';
-import { Text, ScrollView, StyleSheet, View } from 'react-native';
+import { Text, ScrollView, StyleSheet, View} from 'react-native';
+import { Button } from 'react-native-elements';
+import * as WebBrowser from 'expo-web-browser';
+import { Ionicons } from '@expo/vector-icons';
+import colors from '../utils/Colors';
+import links from '../utils/Links'
 
 export default class AboutScreen extends React.Component {
 	static navigationOptions = {
@@ -17,39 +22,88 @@ export default class AboutScreen extends React.Component {
 	}
 	render() {
 		return (
-
-				<ScrollView centerContent = {"true"}>
+				<ScrollView>
+				<View style = {styles.mainContainer}>
 					<View style = { styles.textContainer }>
-						<Text style = { styles.textStyling }>Version 2.0</Text>
-						<Text>-Rebuilt with React Native</Text>
-						<Text>-Multi-platform. Now available on iOS and Android!</Text>
-						<Text>-Added new gallery content</Text>
+						<Text style = { styles.sectionHeader }>Version 2.0</Text>
+						<Text style = {styles.sectionContent}>-Rebuilt with React Native</Text>
+						<Text style = {styles.sectionContent}>-Multi-platform. Now available on iOS and Android!</Text>
+						<Text style = {styles.sectionContent}>-Added new gallery content</Text>
 		
-							<Text>About the App</Text>
-							<Text>Welcome to the University of Michigan Museum of Natural History app! Our app will help you enjoy and interact with the museum on a deeper level.</Text>
-							<Text>Use the Tours feature to take a self-guided audio/text tour of our curated Highlights exhibits. Get a behind-thescenes look at exhibit prep and additional images of things you can't see in the Museum itself. Get prompted to use your noodle with our Think Like a Scientist questions!</Text>
-							<Text>Use the Today @ UMMNH feature to see if there are any special events or Planetarium shows that you can attend today at the museum.</Text>
-	
-							<Text>Connect</Text>
-						
-	
-							<Text>Credits</Text>
-							<Text>Developed in-house at the University of Michigan Museum of Natural History by Case Silva</Text>
-							<Text>UMMNH is a part of the University of Michigan's College of Literature, Science, and the Arts.</Text>
+						<Text style = { styles.sectionHeader }>About the App</Text>
+						<Text style = {styles.sectionContent}>Welcome to the University of Michigan Museum of Natural History app! Our app will help you enjoy and interact with the museum on a deeper level.</Text>
+						<Text style = {styles.sectionContent}>Use the Tours feature to take a self-guided audio/text tour of our curated Highlights exhibits. Get a behind-the-scenes look at exhibit prep and additional images of things you can't see in the Museum itself. Get prompted to use your noodle with our Think Like a Scientist questions!</Text>
+						<Text style = {styles.sectionContent}>Use the Today @ UMMNH feature to see if there are any special events or Planetarium shows that you can attend today at the museum.</Text>
+
+						<Text style = { styles.sectionHeader }>Connect</Text>
+						<View style = { styles.socMedHolder }>
+							<Button 
+								icon = {{name: 'md-globe', type: 'ionicon', size: 32, style: {marginRight: 0}}}
+								buttonStyle = { styles.buttonStyle }
+								onPress = {() => this._openLink(links.ummnhWebsite)}
+							/>
+							<Button 
+								icon = {{name: 'logo-facebook', type: 'ionicon', size: 32, style: {marginRight: 0}}}
+								buttonStyle = { styles.buttonStyle }
+								onPress = { () => this._openLink(links.ummnhFacebook) }
+							/>
+							<Button 
+								icon = {{name: 'logo-twitter', type: 'ionicon', size: 32, style: {marginRight: 0}}}
+								buttonStyle = { styles.buttonStyle }
+								onPress = { () => this._openLink(links.ummnhTwitter) }
+							/>
+							<Button 
+								icon = {{name: 'logo-instagram', type: 'ionicon', size: 32, style: {marginRight: 0}}}
+								buttonStyle = { styles.buttonStyle }
+								onPress = { () => this._openLink(links.ummnhInstagram) }
+							/>
 						</View>
+						<Text style = { styles. sectionHeader }>Credits</Text>
+						<Text style = {styles.sectionContent}>Developed in-house at the University of Michigan Museum of Natural History by Case Silva</Text>
+						<Text style = {styles.sectionContent}>UMMNH is a part of the University of Michigan's College of Literature, Science, and the Arts.</Text>
+					</View>
+				</View>
 				</ScrollView>
 		);
+	}
+	_openLink = (link) => {
+		WebBrowser.openBrowserAsync(link);
 	}
 }
 
 const styles = StyleSheet.create({
-	textContainer : {
+	mainContainer: {
 		flex: 1,
-		width: "90%",
+		width: "100%",
 		alignItems: 'center',
-		backgroundColor: 'red'
+		marginTop: 10
+	},
+	textContainer : {
+		width: "90%",
 	},
 	textStyling : {
 		width: "100%"
+	},
+	sectionHeader: {
+		fontFamily: "whitney-black",
+		paddingTop: 10,
+		paddingBottom: 10,
+		fontSize: 17
+	},
+	sectionContent: {
+		fontFamily: "whitney-medium",
+		paddingBottom: 10,
+		fontSize: 17,
+		textAlign: 'justify',
+		lineHeight: (17 * 1.25)
+	},
+	socMedHolder: {
+		flexDirection: 'row',
+		alignItems: 'flex-start'
+	},
+	buttonStyle: {
+		backgroundColor: colors.ummnhYellow,
+		marginRight: 10,
+		width: 60
 	}
 })
