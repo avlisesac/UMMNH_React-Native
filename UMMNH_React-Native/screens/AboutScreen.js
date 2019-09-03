@@ -4,7 +4,8 @@ import { Button } from 'react-native-elements';
 import * as WebBrowser from 'expo-web-browser';
 import { Ionicons } from '@expo/vector-icons';
 import colors from '../utils/Colors';
-import links from '../utils/Links'
+import links from '../utils/Links';
+import fontSizes from '../utils/FontSizes';
 
 export default class AboutScreen extends React.Component {
 	static navigationOptions = {
@@ -88,14 +89,14 @@ const styles = StyleSheet.create({
 		fontFamily: "whitney-black",
 		paddingTop: 10,
 		paddingBottom: 10,
-		fontSize: 17
+		fontSize: fontSizes.headerSize,
 	},
 	sectionContent: {
 		fontFamily: "whitney-medium",
 		paddingBottom: 10,
-		fontSize: 17,
+		fontSize: fontSizes.bodySize,
 		textAlign: 'justify',
-		lineHeight: (17 * 1.25)
+		lineHeight: (fontSizes.bodySize * 1.25)
 	},
 	socMedHolder: {
 		flexDirection: 'row',

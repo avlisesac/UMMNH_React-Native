@@ -1,7 +1,5 @@
 import Constants from 'expo-constants'
 
-console.log(Constants.platform)
-
 const headerSize = () => {
 	if(isPad()){
 		return 27
@@ -9,17 +7,38 @@ const headerSize = () => {
 	return 22
 }
 
+const subheaderSize = () => {
+	if(isPad()){
+		return 22
+	}
+	return 17
+}
+
+const bodySize = () => {
+	if(isPad()){
+		return 22
+	}
+	return 17
+}
+
 const fontSizes = {
 	headerSize: headerSize(),
+	subheaderSize: subheaderSize(),
+	bodySize: bodySize(),
 }
 
 function isPad(){
-	if(Constants.platform === 'android'){
+	const platform = Object.keys(Constants.platform)[0];
+	if(platform === 'android'){
+		console.log("running on android device")
 		return false
 	}
-	else if(Constants.platform.ios.userInterfaceIdiom === 'tablet'){
-		return true
+	const userInterfaceIdiom = Constants.platform.ios['userInterfaceIdiom'];
+	if (userInterfaceIdiom !== 'tablet'){
+		console.log("running on ios phone");
+		return false
 	}
-	return false
+	console.log("running on ios tablet")
+	return true
 }
 export default fontSizes

@@ -101,14 +101,14 @@ const styles = StyleSheet.create({
 	subheaderText: {
 		color: colors.ummnhDarkRed,
 		fontFamily: 'whitney-semibold',
-		fontSize: 17,
+		fontSize: fontSizes.subheaderSize,
 		marginLeft: 5
 	},
 	description: {
 		fontFamily: 'whitney-medium',
 		textAlign: 'justify',
 		marginTop: 10,
-		fontSize: 17,
-		lineHeight: (17 * 1.25)
+		fontSize: fontSizes.bodySize,
+		lineHeight: (fontSizes.bodySize * 1.25)
 	}
 })
