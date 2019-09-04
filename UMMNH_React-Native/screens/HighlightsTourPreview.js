@@ -1,7 +1,9 @@
 import React from 'react'
-import { Text, StyleSheet, View, Image } from 'react-native'
+import { Text, View, Image } from 'react-native'
 import { Button } from 'react-native-elements'
+import { StackActions } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
+import styles from '../stylesheets/HighlightsTourPreview'
 import colors from '../utils/Colors'
 import fontSizes from '../utils/FontSizes'
 
@@ -29,7 +31,7 @@ export default class HightlightsTourPreview extends React.Component {
 						<View style = { styles.descriptionContainer }>
 							<Text style = { styles.header }>Highlights Tour</Text>
 							<View style = { styles.subheaderContainer }>
-								<Ionicons name = 'md-time' size = { 17 } color = { colors.ummnhDarkRed } />
+								<Ionicons name = 'md-time' size = { fontSizes.subheaderSize } color = { colors.ummnhDarkRed } />
 								<Text style = { styles.subheaderText }>45 min.</Text>
 							</View>
 							<Text style = { styles.description }>
@@ -44,7 +46,7 @@ export default class HightlightsTourPreview extends React.Component {
       		            title = "Let's Go!" 
       		            buttonStyle = { styles.buttonStyle } 
       		            titleStyle = { styles.buttonTitleStyle }
-      		            onPress = { () => this.props.navigation.navigate('Tours')} />
+      		            onPress = { () => this.props.navigation.dispatch(pushAction)} />
 					</View>
 				</View>
 			</View>
@@ -52,63 +54,9 @@ export default class HightlightsTourPreview extends React.Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	mainContainer: {
-		flex: 1,
-		alignItems: 'center'
-	},
-	widthContainer: {
-		flex: 1,
-		width: '90%',
-	},
-	upperContent: {
-		flex: 2,
-	},
-	lowerContent: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	buttonStyle: {
-		backgroundColor: colors.ummnhYellow,
-		paddingLeft: 25,
-		paddingRight: 25
-	},
-	buttonTitleStyle: {
-		fontFamily: 'whitney-black',
-		color: colors.ummnhDarkBlue,
-		fontSize: 22,
-	},
-	heroImage: {
-		marginTop: 10,
-		width: '100%',
-		height: undefined,
-		aspectRatio: 16/9,
-	},
-	descriptionContainer: {
-		marginTop: 10,
-		flex: 1,
-	},
-	header: {
-		color: colors.ummnhDarkBlue,
-		fontFamily: "whitney-black",
-		fontSize: fontSizes.headerSize
-	},
-	subheaderContainer: {
-		marginTop: 5,
-		flexDirection: 'row'
-	},
-	subheaderText: {
-		color: colors.ummnhDarkRed,
-		fontFamily: 'whitney-semibold',
-		fontSize: fontSizes.subheaderSize,
-		marginLeft: 5
-	},
-	description: {
-		fontFamily: 'whitney-medium',
-		textAlign: 'justify',
-		marginTop: 10,
-		fontSize: fontSizes.bodySize,
-		lineHeight: (fontSizes.bodySize * 1.25)
+const pushAction = StackActions.push({
+	routeName: "Navigation",
+	params: {
+		fileToFetch: "Stop1_Mastodons"
 	}
 })
