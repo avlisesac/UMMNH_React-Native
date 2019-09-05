@@ -19,6 +19,7 @@ export default class HightlightsTourPreview extends React.Component {
 		headerBackTitleStyle: {
 			color: colors.ummnhDarkBlue
 		},
+		headerBackTitle: "Back",
 		headerTintColor: colors.ummnhDarkBlue
 	}
 	render() {

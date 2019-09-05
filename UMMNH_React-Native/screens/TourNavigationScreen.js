@@ -20,6 +20,7 @@ class TourNavigationScreen extends React.Component {
 		headerBackTitleStyle: {
 			color: colors.ummnhDarkBlue
 		},
+		headerBackTitle: "Back",
 		headerTintColor: colors.ummnhDarkBlue
 	})
 
@@ -38,8 +39,8 @@ class TourNavigationScreen extends React.Component {
 		}
 	}
 
-	async componentWillMount(){
-		this.response = await (screenInfo(this.props.navigation.state.params.fileToFetch)).default
+	componentWillMount(){
+		this.response = (screenInfo(this.props.navigation.state.params.fileToFetch)).default
 		this.props.navigation.setParams({
 			title: this.response.navTitle
 		})
@@ -51,6 +52,12 @@ class TourNavigationScreen extends React.Component {
 			description: this.response.description,
 			mapImage: this.response.mapImage,
 			nextScreen: this.response.nextScreen,
+			
+		})
+	}
+
+	componentDidMount(){
+		this.setState({
 			screenInfoPopulated: true
 		})
 	}
@@ -111,10 +118,6 @@ const navigationImages = {
 	'NavImage_Mastodons_1': require('../assets/img/navigation/highlightsTour/Tours_Highlights_Navigation_Mastodons_01.png'),
 	'NavImage_Mastodons_2': require('../assets/img/navigation/highlightsTour/Tours_Highlights_Navigation_Mastodons_02.png'),
 	
-}
-
-const showOnMapImages = {
-	'MapImage_Mastodons': require('../assets/img/showOnMap/highlightsTour/Tours_Highlights_ShowOnMap_Mastodons.png')
 }
 
 
