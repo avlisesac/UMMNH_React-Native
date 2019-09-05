@@ -6,6 +6,7 @@ import AboutScreen from './screens/AboutScreen';
 import HighlightsTourPreview from './screens/HighlightsTourPreview';
 import TourNavigationScreen from './screens/TourNavigationScreen';
 import ShowOnMapScreen from './screens/ShowOnMapScreen';
+import TourStopScreen from './screens/TourStopScreen';
 
 
 export default class  App  extends React.Component {
@@ -23,7 +24,8 @@ const RootStack = createStackNavigator(
     About: AboutScreen,
     Tours: HighlightsTourPreview,
     Navigation: TourNavigationScreen,
-    ShowOnMap: ShowOnMapScreen
+    ShowOnMap: ShowOnMapScreen,
+    TourStop: TourStopScreen
   },
   {
     initialRouteName: 'Home'

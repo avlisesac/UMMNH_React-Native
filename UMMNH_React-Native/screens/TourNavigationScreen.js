@@ -96,7 +96,7 @@ class TourNavigationScreen extends React.Component {
 									title = 'Found It!'
 									buttonStyle = { styles.buttonStyle }
 									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.props.navigation.push('TourStopScreen', { fileToLoad: this.nextScreen }) }
+									onPress = { () => this.props.navigation.push('TourStop', { fileToLoad: this.nextScreen }) }
 								/>
 								</View>
 						</View>

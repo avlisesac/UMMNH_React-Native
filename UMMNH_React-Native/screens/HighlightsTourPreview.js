@@ -24,11 +24,13 @@ export default class HightlightsTourPreview extends React.Component {
 	}
 	render() {
 		return (
-			<View style = { styles.mainContainer }>
-				<View style = { styles.widthContainer }>
-				{/*Upper Area*/}
+			<View style = { styles.view }>
+				<View style = { styles.mainContainer }>
+					{/*Upper Area*/}
 					<View style = { styles.upperContent }>
-						<Image style = { styles.heroImage } source = {require('../assets/img/HeroImage_Doli.png')} resizeMode = "contain" />
+						<View style = { styles.heroImageContainer }>
+							<Image style = { styles.heroImage } source = {require('../assets/img/HeroImage_Doli.png')} resizeMode = "contain" />
+						</View>
 						<View style = { styles.descriptionContainer }>
 							<Text style = { styles.header }>Highlights Tour</Text>
 							<View style = { styles.subheaderContainer }>
@@ -36,18 +38,21 @@ export default class HightlightsTourPreview extends React.Component {
 								<Text style = { styles.subheaderText }>45 min.</Text>
 							</View>
 							<Text style = { styles.description }>
-								See the best that the Museum of Natural History has to offer! This tour will last approximately fourty-five minutes and show you our favorite features of this amazing new space. At each stop, you will get additional facts and information that we couldn't quite cram on to the placards. (Trust us, we tried.)
+									See the best that the Museum of Natural History has to offer! This tour will last approximately fourty-five minutes and show you our favorite features of this amazing new space. At each stop, you will get additional facts and information that we couldn't quite cram on to the placards. (Trust us, we tried.)
 							</Text>
 						</View>
 					</View>
-
-				{/*Lower Area*/}
+							
+	
+					{/*Lower Area*/}
 					<View style = { styles.lowerContent }>
-						<Button 
-      		            title = "Let's Go!" 
-      		            buttonStyle = { styles.buttonStyle } 
-      		            titleStyle = { styles.buttonTitleStyle }
-      		            onPress = { () => this.props.navigation.dispatch(pushAction)} />
+						<View style = { styles.buttonContainer }>
+							<Button 
+      			            	title = "Let's Go!" 
+      			            	buttonStyle = { styles.buttonStyle } 
+      			            	titleStyle = { styles.buttonTitleStyle }
+      			            	onPress = { () => this.props.navigation.dispatch(pushAction)} />
+      			        </View>
 					</View>
 				</View>
 			</View>

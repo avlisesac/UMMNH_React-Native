@@ -4,13 +4,14 @@ import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
 
 const styles = StyleSheet.create({
-	mainContainer: {
-		flex: 1,
-		alignItems: 'center'
+	view: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		flex: 1
 	},
-	widthContainer: {
-		flex: 1,
+	mainContainer: {
 		width: '90%',
+		height: '95%'
 	},
 	upperContent: {
 		flex: 2,
@@ -18,24 +19,32 @@ const styles = StyleSheet.create({
 	lowerContent: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+	},
+	buttonContainer: {
+		flex: 1,
+		width: '66%',
+		justifyContent: 'center',
+		alignItems: 'stretch'
 	},
 	buttonStyle: {
 		backgroundColor: colors.ummnhYellow,
-		paddingLeft: 25,
-		paddingRight: 25
 	},
 	buttonTitleStyle: {
 		fontFamily: 'whitney-black',
 		color: colors.ummnhDarkBlue,
 		fontSize: 22,
 	},
-	heroImage: {
-		marginTop: 10,
+	heroImageContainer: {
 		width: '100%',
-		height: undefined,
-		aspectRatio: 16/9,
+		aspectRatio: 1920/1080,
 		backgroundColor: 'grey'
+	},
+	heroImage: {
+		flex: 1,
+		height: null,
+		width: null,
+		resizeMode: 'cover'
 	},
 	descriptionContainer: {
 		marginTop: 10,
