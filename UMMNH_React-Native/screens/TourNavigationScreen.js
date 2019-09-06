@@ -9,8 +9,9 @@ import styles from '../stylesheets/TourNavigationScreen';
 import Swiper from 'react-native-swiper';
 
 class TourNavigationScreen extends React.Component {
+
 	static navigationOptions = ({navigation}) => ({
-		title: typeof(navigation.state.params)==='undefined' || typeof(navigation.state.params.title) === ' ' ? 'Find': navigation.state.params.title,
+		title: navigation.getParam('propsToSend').navTitle,
 		headerStyle: {
 			backgroundColor: colors.ummnhLightRed
 		},
@@ -22,41 +23,34 @@ class TourNavigationScreen extends React.Component {
 		},
 		headerBackTitle: "Back",
 		headerTintColor: colors.ummnhDarkBlue
-	})
+	});
+
 
 	constructor(props){
 		super(props);
+
+
+		let listOfProps = this.props.navigation.getParam('propsToSend')
+		propsToSend = getProps(this.props.navigation.getParam('propsToSend').nextScreen);
+
 		this.state = {
-			navTitle: '',
-			navImage_1: '',
-			navImage_2: '',
-			header: '',
-			subheader: '',
-			description: '',
-			mapImage: '',
-			nextScreen: '',
+			navTitle: listOfProps.navTitle,
+			navImage_1: navigationImages[listOfProps.navImage_1],
+			navImage_2: navigationImages[listOfProps.navImage_2],
+			header: listOfProps.header,
+			subheader: listOfProps.subheader,
+			description: listOfProps.description,
+			mapImage: listOfProps.mapImage,
+			nextScreen: listOfProps.nextScreen,
+			propsToSend: propsToSend,
 			screenInfoPopulated: false,
 		}
-	}
+		this.props.navigation.setParams({title: this.state.navTitle})
 
-	componentWillMount(){
-		this.response = (screenInfo(this.props.navigation.state.params.fileToFetch)).default
-		this.props.navigation.setParams({
-			title: this.response.navTitle
-		})
-		this.setState({
-			navImage_1: navigationImages[this.response.navImage_1],
-			navImage_2: navigationImages[this.response.navImage_2],
-			header: this.response.header,
-			subheader: this.response.subheader,
-			description: this.response.description,
-			mapImage: this.response.mapImage,
-			nextScreen: this.response.nextScreen,
-			
-		})
 	}
 
 	componentDidMount(){
+		
 		this.setState({
 			screenInfoPopulated: true
 		})
@@ -72,8 +66,8 @@ class TourNavigationScreen extends React.Component {
 					<View style = { styles.upperArea }>
 						<View style = { styles.swipeContainer }>
 							<Swiper style = { styles.wrapper } showsButtons = { true } activeDotColor = { 'white' } nextButton = { <Text style={styles.buttonText}>›</Text> } prevButton = { <Text style={styles.buttonText}>‹</Text>} >
-								<Image style = { styles.navImage } source = {this.state.navImage_1}/>
-								<Image style = { styles.navImage } source = {this.state.navImage_2}/>
+								<Image style = { styles.navImage } source = { this.state.navImage_1 }/>
+								<Image style = { styles.navImage } source = { this.state.navImage_2 }/>
 							</Swiper>
 						</View>
 
@@ -96,7 +90,7 @@ class TourNavigationScreen extends React.Component {
 									title = 'Found It!'
 									buttonStyle = { styles.buttonStyle }
 									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.props.navigation.push('TourStop', { fileToLoad: this.nextScreen }) }
+									onPress = { () => this.props.navigation.push('TourStop', { propsToSend }) }
 								/>
 								</View>
 						</View>
@@ -106,13 +100,31 @@ class TourNavigationScreen extends React.Component {
 	}
 }
 
-const screenInfo = (
-		(fileToFetch) => {
-			switch(fileToFetch){
-				case 'Stop1_Mastodons' : return require('../assets/textFiles/navigation/highlightsTour/Stop1_Mastodons.js');
-			}
-		}
-	);
+let propsToSend;
+
+function getProps(nextScreen) {
+	let fileData = nextScreenData[nextScreen].default
+
+	return {
+		navTitle: fileData.navTitle,
+		heroImage: fileData.heroImage,
+		header: fileData.header,
+		subheader: fileData.subheader,
+		shortDescription: fileData.shortDescription,
+		fullDescription: fileData.fullDescription,
+		TLAS_Q1: fileData.TLAS_Q1,
+		TLAS_Q2: fileData.TLAS_Q2,
+		TLAS_Q3: fileData.TLAS_Q3,
+		TLAS_A1: fileData.TLAS_A1,
+		TLAS_A2: fileData.TLAS_A2,
+		TLAS_A3: fileData.TLAS_A3,
+		nextScreen: fileData.nextScreen,
+	}
+}
+
+const nextScreenData = {
+	'Stop1_Mastodons': require('../assets/textFiles/stops/highlightsTour/Stop1_Mastodons.js'),
+}
 
 const navigationImages = {
 	'NavImage_Mastodons_1': require('../assets/img/navigation/highlightsTour/Tours_Highlights_Navigation_Mastodons_01.png'),

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: "100%",
 		alignItems: 'center',
-		marginTop: 10
+		marginTop: '5%'
 	},
 	textContainer : {
 		width: "90%",

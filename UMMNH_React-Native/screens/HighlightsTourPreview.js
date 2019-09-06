@@ -51,7 +51,7 @@ export default class HightlightsTourPreview extends React.Component {
       			            	title = "Let's Go!" 
       			            	buttonStyle = { styles.buttonStyle } 
       			            	titleStyle = { styles.buttonTitleStyle }
-      			            	onPress = { () => this.props.navigation.dispatch(pushAction)} />
+      			            	onPress = { () => this.props.navigation.push('Navigation', { propsToSend })} />
       			        </View>
 					</View>
 				</View>
@@ -60,9 +60,21 @@ export default class HightlightsTourPreview extends React.Component {
 	}
 }
 
-const pushAction = StackActions.push({
-	routeName: "Navigation",
-	params: {
-		fileToFetch: "Stop1_Mastodons"
+const fileData = require('../assets/textFiles/navigation/highlightsTour/Stop1_Mastodons.js')
+
+const propsToSend = gatherProps(fileData.default)
+
+
+function gatherProps(fileData){
+	console.log(fileData.navTitle)
+	return {
+		navTitle: fileData.navTitle,
+		navImage_1: fileData.navImage_1,
+		navImage_2: fileData.navImage_2,
+		header: fileData.header,
+		subheader: fileData.subheader,
+		description: fileData.description,
+		mapImage: fileData.mapImage,
+		nextScreen: fileData.nextScreen,
 	}
-})
+}
