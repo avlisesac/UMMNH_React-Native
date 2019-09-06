@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
 		marginTop: '5%',
 		marginBottom: '5%',
 		width: '90%',
-		backgroundColor: 'red',
 	},
 	heroHolder: {
 		width: '100%',
@@ -32,6 +31,25 @@ const styles = StyleSheet.create({
 	},
 	subheader: {
 		marginLeft: 5
+	},
+	TLASContainer: {
+		backgroundColor: colors.ummnhLightGreen,
+		alignItems: 'center'
+	},
+	TLASQuestionHolder: {
+		width: '90%'
+	},
+	TLASButtonStyle: {
+		backgroundColor: 'rgba(0,0,0,0)',
+		paddingLeft: 0,
+		paddingRight: 0
+	},
+	TLASButtonTitleStyle: {
+		color: 'black',
+		textAlign: 'justify',
+		fontFamily: 'whitney-black',
+		fontSize: fontSizes.subheaderSize,
+		lineHeight: (fontSizes.subheaderSize * 1.25)
 	}
 })
 

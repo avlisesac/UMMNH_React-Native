@@ -58,13 +58,24 @@ export default class TourStopScreen extends React.Component{
 							<Text style = { styles.TLASSubheader }>(Tap on a question to view answer)</Text>
 
 							<View style = { styles.TLASQuestionHolder }>
-								<Button title = { this.state.TLAS_Q1 }
+								<Button 
+									title =  { this.state.TLAS_Q1 }
+									buttonStyle = { styles.TLASButtonStyle}
+									titleStyle = { styles.TLASButtonTitleStyle }
 								/>
 								<Text style = { styles.TLASAnswer }>{ this.state.TLAS_A1 }</Text>
-								<Button title = { this.state.TLAS_Q2 }
+
+								<Button 
+									title = { this.state.TLAS_Q2 }
+									buttonStyle = { styles.TLASButtonStyle }
+									titleStyle = { styles.TLASButtonTitleStyle }
 								/>
 								<Text style = { styles.TLASAnswer }>{ this.state.TLAS_A2 }</Text>
-								<Button title = { this.state.TLAS_Q3 }
+
+								<Button 
+									title = { this.state.TLAS_Q3 }
+									buttonStyle = { styles.TLASButtonStyle }
+									titleStyle = { styles.TLASButtonTitleStyle }
 								/>
 								<Text style = { styles.TLASAnswer }>{ this.state.TLAS_A3 }</Text>
 							</View> 
