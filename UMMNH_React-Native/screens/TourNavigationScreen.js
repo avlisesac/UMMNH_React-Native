@@ -21,14 +21,21 @@ class TourNavigationScreen extends React.Component {
 		headerBackTitleStyle: {
 			color: colors.ummnhDarkBlue
 		},
+		headerTintColor: colors.ummnhDarkBlue,
 		headerBackTitle: "Back",
-		headerTintColor: colors.ummnhDarkBlue
+		headerRight: (
+			<Button
+				title = "Exit"
+				buttonStyle = { styles.exitButtonStyle }
+				titleStyle = { styles.exitButtonTitleStyle }
+				onPress = { () => navigation.push('Exit') }
+			/>
+		)
 	});
 
 
 	constructor(props){
 		super(props);
-
 
 		let listOfProps = this.props.navigation.getParam('propsToSend')
 		propsToSend = getProps(this.props.navigation.getParam('propsToSend').nextScreen);
@@ -45,8 +52,6 @@ class TourNavigationScreen extends React.Component {
 			propsToSend: propsToSend,
 			screenInfoPopulated: false,
 		}
-		this.props.navigation.setParams({title: this.state.navTitle})
-
 	}
 
 	componentDidMount(){
@@ -119,6 +124,7 @@ function getProps(nextScreen) {
 		TLAS_A2: fileData.TLAS_A2,
 		TLAS_A3: fileData.TLAS_A3,
 		nextScreen: fileData.nextScreen,
+		imageGallery: fileData.imageGallery,
 	}
 }
 

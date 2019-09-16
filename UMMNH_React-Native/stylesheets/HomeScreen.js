@@ -3,6 +3,16 @@ import colors from '../utils/Colors'
 import fontSizes from '../utils/FontSizes'
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    flex: 1
+  },
+  laodingText: {
+    fontFamily: 'whitney-medium',
+    fontSize: fontSizes.bodySize,
+  },
 	container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -20,7 +30,9 @@ const styles = StyleSheet.create({
   menuContainer: {
     backgroundColor: 'rgba(255,255,255, 0.9)',
     width: '90%',
-    height: '95%',
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 10,
     alignItems: 'center',
     justifyContent: 'space-between'
   },
@@ -29,9 +41,17 @@ const styles = StyleSheet.create({
     width: '66%',
     justifyContent: "flex-end"
   },
-  welcomeMessage: {
+  welcomeMessageContainer: {
+    flex: 1,
     width: '90%',
     alignItems: 'flex-end'
+  },
+  welcomeMessageImage: {
+    flex: 1,
+    width: '100%',
+    aspectRatio: 486/637,
+    resizeMode: 'cover',
+    marginTop: 10,
   },
   ummnhLightBlue: {
     color: '#00b6f1'

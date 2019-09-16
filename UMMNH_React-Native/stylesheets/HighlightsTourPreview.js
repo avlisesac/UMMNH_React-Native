@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
 	},
 	mainContainer: {
 		width: '90%',
-		height: '95%'
+		flex: 1,
+		marginTop: 10,
+		marginBottom: 10,
 	},
 	upperContent: {
 		flex: 2,

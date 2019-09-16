@@ -9,9 +9,9 @@ const headerSize = () => {
 
 const subheaderSize = () => {
 	if(isPad()){
-		return 22
+		return 25
 	}
-	return 17
+	return 20
 }
 
 const bodySize = () => {
@@ -20,6 +20,7 @@ const bodySize = () => {
 	}
 	return 17
 }
+
 
 const fontSizes = {
 	headerSize: headerSize(),

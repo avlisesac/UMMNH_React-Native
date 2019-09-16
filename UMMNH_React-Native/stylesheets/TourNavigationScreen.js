@@ -3,6 +3,12 @@ import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
 
 const styles = StyleSheet.create({
+	exitButtonStyle: {
+		backgroundColor: 'rgba(0,0,0,0)'
+	},
+	exitButtonTitleStyle: {
+		color: colors.ummnhDarkBlue
+	},
 	view: {
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -10,7 +16,9 @@ const styles = StyleSheet.create({
 	},
 	mainContainer: {
 		width: '90%',
-		height: '95%',
+		flex: 1,
+		marginTop: 10,
+		marginBottom: 10,
 	},
 	upperArea: {
 		flex: 2,
@@ -32,8 +40,14 @@ const styles = StyleSheet.create({
 		backgroundColor: 'grey'
 	},
 	buttonText: {
-		color: 'white',
 		fontSize: 65,
+		color: 'white',
+		textShadowColor: 'black',
+		textShadowOffset: {
+			with: 1.5,
+			height: 1.5
+		},
+		textShadowRadius: 1,
 	},
 	header: {
 		color: colors.ummnhDarkBlue,

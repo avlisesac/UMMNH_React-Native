@@ -7,6 +7,9 @@ import HighlightsTourPreview from './screens/HighlightsTourPreview';
 import TourNavigationScreen from './screens/TourNavigationScreen';
 import ShowOnMapScreen from './screens/ShowOnMapScreen';
 import TourStopScreen from './screens/TourStopScreen';
+import ExitScreen from './screens/ExitScreen';
+import ImageGalleryScreen from './screens/ImageGalleryScreen'
+import TodayAtUMMNHScreen from './screens/TodayAtUMMNHScreen'
 
 
 export default class  App  extends React.Component {
@@ -25,7 +28,10 @@ const RootStack = createStackNavigator(
     Tours: HighlightsTourPreview,
     Navigation: TourNavigationScreen,
     ShowOnMap: ShowOnMapScreen,
-    TourStop: TourStopScreen
+    TourStop: TourStopScreen,
+    Exit: ExitScreen,
+    ImageGallery: ImageGalleryScreen,
+    TodayAtUMMNH: TodayAtUMMNHScreen,
   },
   {
     initialRouteName: 'Home'
