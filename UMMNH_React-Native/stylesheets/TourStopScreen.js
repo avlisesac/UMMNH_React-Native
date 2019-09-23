@@ -141,13 +141,15 @@ const styles = StyleSheet.create({
 		textAlign: 'justify',
 		fontFamily: 'whitney-black',
 		fontSize: fontSizes.bodySize,
-		lineHeight: (fontSizes.bodySize * 1.25)
+		lineHeight: (fontSizes.bodySize * 1.25),
+		marginTop: 5,
 	},
 	TLASAnswer: {
 		textAlign: 'justify',
 		fontFamily: 'whitney-medium',
 		fontSize: fontSizes.bodySize,
-		lineHeight: (fontSizes.bodySize * 1.25)
+		lineHeight: (fontSizes.bodySize * 1.25),
+		marginTop: 5,
 	},
 	buttonContainer: {
 		height: 150,

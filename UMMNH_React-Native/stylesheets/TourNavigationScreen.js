@@ -3,6 +3,17 @@ import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
 
 const styles = StyleSheet.create({
+	loadingContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
+	loadingText: {
+		fontFamily: 'whitney-medium',
+		fontSize: fontSizes.bodySize,
+		marginTop: 10
+	},
 	exitButtonStyle: {
 		backgroundColor: 'rgba(0,0,0,0)'
 	},
@@ -87,6 +98,13 @@ const styles = StyleSheet.create({
 		color: colors.ummnhDarkBlue,
 		fontFamily: 'whitney-black',
 		fontSize: 22
+	},
+	bodyCopy: {
+		fontSize: fontSizes.bodySize,
+		marginTop: 5,
+		fontFamily: 'whitney-medium',
+		textAlign: 'justify',
+		lineHeight: (fontSizes.bodySize * 1.25)
 	}
 
 })

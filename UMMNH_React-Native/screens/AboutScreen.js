@@ -61,7 +61,7 @@ export default class AboutScreen extends React.Component {
 							/>
 						</View>
 						<Text style = { styles. sectionHeader }>Credits</Text>
-						<Text style = {styles.sectionContent}>Developed in-house at the University of Michigan Museum of Natural History by Case Silva</Text>
+						<Text style = {styles.sectionContent}>Developed in-house at the University of Michigan Museum of Natural History by Case Silva 👋👋</Text>
 						<Text style = {styles.sectionContent}>UMMNH is a part of the University of Michigan's College of Literature, Science, and the Arts.</Text>
 					</View>
 				</View>

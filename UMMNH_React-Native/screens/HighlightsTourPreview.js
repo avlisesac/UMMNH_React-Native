@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import styles from '../stylesheets/HighlightsTourPreview'
 import colors from '../utils/Colors'
 import fontSizes from '../utils/FontSizes'
+import BodyCopy from '../components/BodyCopy'
 
 export default class HightlightsTourPreview extends React.Component {
 	static navigationOptions = {
@@ -37,8 +38,10 @@ export default class HightlightsTourPreview extends React.Component {
 								<Ionicons name = 'md-time' size = { fontSizes.subheaderSize } color = { colors.ummnhDarkRed } />
 								<Text style = { styles.subheaderText }>45 min.</Text>
 							</View>
-							<Text style = { styles.description }>
-									See the best that the Museum of Natural History has to offer! This tour will last approximately fourty-five minutes and show you our favorite features of this amazing new space. At each stop, you will get additional facts and information that we couldn't quite cram on to the placards. (Trust us, we tried.)
+							<Text style = { styles.bodyCopy }>
+								<BodyCopy style = { styles.bodyCopy } textString = {
+									`See the best that the Museum of Natural History has to offer! This tour will last approximately fourty-five minutes and show you our favorite features of this amazing new space. At each stop, you will get additional facts and information that we couldn't quite cram on to the placards. (Trust us, we tried.)`
+								}/>
 							</Text>
 						</View>
 					</View>
@@ -51,7 +54,7 @@ export default class HightlightsTourPreview extends React.Component {
       			            	title = "Let's Go!" 
       			            	buttonStyle = { styles.buttonStyle } 
       			            	titleStyle = { styles.buttonTitleStyle }
-      			            	onPress = { () => this.props.navigation.push('Navigation', { propsToSend })} />
+      			            	onPress = { () => this.props.navigation.push('Navigation',  { screenToLoad: 'Stop1_Mastodons' })} />
       			        </View>
 					</View>
 				</View>
@@ -66,7 +69,6 @@ const propsToSend = gatherProps(fileData.default)
 
 
 function gatherProps(fileData){
-	console.log(fileData.navTitle)
 	return {
 		navTitle: fileData.navTitle,
 		navImage_1: fileData.navImage_1,

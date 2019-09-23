@@ -73,7 +73,14 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		fontSize: fontSizes.bodySize,
 		lineHeight: (fontSizes.bodySize * 1.25)
-	}
+	},
+	bodyCopy: {
+		fontSize: fontSizes.bodySize,
+		fontFamily: 'whitney-medium',
+		textAlign: 'justify',
+		marginTop: 10,
+		lineHeight: (fontSizes.bodySize * 1.25)
+	},
 })
 
 export default styles

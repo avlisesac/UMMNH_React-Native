@@ -1,16 +1,20 @@
 import React from 'react'
-import { ScrollView, Text, View, Image, ActivityIndicator } from 'react-native'
+import { ScrollView, Text, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { Audio } from 'expo-av'
 import styles from '../stylesheets/TourStopScreen'
 import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
+import BodyCopy from '../components/BodyCopy'
+import heroImages from '../utils/HeroImages'
+import audioFiles from '../utils/AudioFiles'
+import stopScreenData from '../utils/StopScreenData'
 
 export default class TourStopScreen extends React.Component{
 
 	static navigationOptions = ({navigation}) => ({
-		title: navigation.getParam('propsToSend').navTitle,
+		title: navigation.state.params.title,
 		headerStyle: {
 			backgroundColor: colors.ummnhLightRed
 		},
@@ -34,7 +38,8 @@ export default class TourStopScreen extends React.Component{
 
 	async loadAudio(){
 		try{
-			console.log('trying to load audio...')
+			soundObject.unloadAsync()
+
 			await soundObject.loadAsync(audioFiles[this.state.header])
 
 			this.setState({
@@ -49,32 +54,16 @@ export default class TourStopScreen extends React.Component{
 	constructor(props){
 		super(props)
 
-		let listOfProps = this.props.navigation.getParam('propsToSend')
+		this.state = ({
+			screenLoaded: false,
+			audioLoaded: false
+		})
+	}
 
-		this.state = {
-			navTitle: listOfProps.navTitle,
-			heroImage: heroImages[listOfProps.heroImage],
-			header: listOfProps.header,
-			subheader: listOfProps.subheader,
-			shortDescription: listOfProps.shortDescription,
-			fullDescription: listOfProps.fullDescription,
-			showFullDescription: false,
-			TLAS_Q1: listOfProps.TLAS_Q1,
-			TLAS_Q2: listOfProps.TLAS_Q2,
-			TLAS_Q3: listOfProps.TLAS_Q3,
-			TLAS_A1: listOfProps.TLAS_A1,
-			TLAS_A2: listOfProps.TLAS_A2,
-			TLAS_A3: listOfProps.TLAS_A3,
-			showTLAS_A1: false,
-			showTLAS_A2: false,
-			showTLAS_A3: false,
-			imageGalleryContent: listOfProps.imageGallery,
-			audioLoaded: false,
-			playPauseIcon: 'md-play',
-			audioIsPlaying: false
-		}
-
-		this.loadAudio()
+	componentWillMount(){
+		const { navigation } = this.props
+		const screenToLoad = navigation.getParam('screenToLoad')
+		this.generateScreen(screenToLoad)
 	}
 
 	componentWillUnmount(){
@@ -108,7 +97,8 @@ export default class TourStopScreen extends React.Component{
 	}
 
 	render(){
-		if(!this.state.audioLoaded){
+		/*-----LOADING-----*/
+		if(!this.state.screenLoaded || !this.state.audioLoaded || this.props.navigation.getParam('title') !== this.state.navTitle){
 			return(
 				<View style = { styles.loadingContainer }>
 					<ActivityIndicator size = 'large' />
@@ -116,6 +106,8 @@ export default class TourStopScreen extends React.Component{
 				</View>
 			)
 		}
+
+		/*-----LOADED-----*/
 		return(
 			<ScrollView contentContainerStyle = { styles.ScrollView }>
 				<View style = { styles.view }>
@@ -137,7 +129,9 @@ export default class TourStopScreen extends React.Component{
 							<Text style = { styles.subheader }>{ this.state.subheader }</Text>
 						</View>
 
-						<Text style = { styles.shortDescription }>{ this.state.shortDescription }</Text>
+						<Text style = { styles.shortDescription }>
+							<BodyCopy textString = { this.state.shortDescription }/>
+						</Text>
 
 						<View style = { styles.audioTourContainer }>
 							<Text style = { styles.audioTourHeader }>Audio Tour</Text>
@@ -163,36 +157,60 @@ export default class TourStopScreen extends React.Component{
 							</View>
 						</View>
 
-						{ this.state.showFullDescription && <Text style = { styles.fullDescription }>{ this.state.fullDescription }</Text>}
+						{/* Full Description */}
+						{ this.state.showFullDescription && 
+							<Text style = { styles.fullDescription }>
+								<BodyCopy textString = { this.state.fullDescription }/>
+							</Text>
+						}
 
 						<View style = { styles.TLASContainer }>
 							<Text style = { styles.TLASHeader }>Think Like a Scientist</Text>
 							<Text style = { styles.TLASSubheader }>(Tap on a question to view answer)</Text>
 
 							<View style = { styles.TLASQuestionHolder }>
-								<Button 
-									title =  { this.state.TLAS_Q1 }
-									buttonStyle = { styles.TLASButtonStyle}
-									titleStyle = { styles.TLASButtonTitleStyle }
-									onPress = { () => this.setState({ showTLAS_A1: !this.state.showTLAS_A1 }) }
-								/>
-								{ this.state.showTLAS_A1 && <Text style = { styles.TLASAnswer }>{ this.state.TLAS_A1 }</Text> }
 
-								<Button 
-									title = { this.state.TLAS_Q2 }
-									buttonStyle = { styles.TLASButtonStyle }
-									titleStyle = { styles.TLASButtonTitleStyle }
-									onPress = { () => this.setState({ showTLAS_A2: !this.state.showTLAS_A2 }) }
-								/>
-								{ this.state.showTLAS_A2 && <Text style = { styles.TLASAnswer }>{ this.state.TLAS_A2 }</Text> }
+								{/* Question 1 */}
+								<TouchableOpacity onPress = { () => this.setState({showTLAS_A1: !this.state.showTLAS_A1 }) }>
+									<Text style = { styles.TLASButtonTitleStyle }>
+										<BodyCopy textString = { this.state.TLAS_Q1 } parentFamily = 'black'/>
+									</Text>
+								</TouchableOpacity>
 
-								<Button 
-									title = { this.state.TLAS_Q3 }
-									buttonStyle = { styles.TLASButtonStyle }
-									titleStyle = { styles.TLASButtonTitleStyle }
-									onPress = { () => this.setState({ showTLAS_A3: !this.state.showTLAS_A3 }) }
-								/>
-								{ this.state.showTLAS_A3 && <Text style = { styles.TLASAnswer }>{ this.state.TLAS_A3 }</Text> }
+								{/* Answer 1 */}
+								{ this.state.showTLAS_A1 && 
+									<Text style = { styles.TLASAnswer }>
+										<BodyCopy textString = { this.state.TLAS_A1 }/>
+									</Text> 
+								}
+
+								{/* Question 2 */}
+								<TouchableOpacity onPress = { () => this.setState({showTLAS_A2: !this.state.showTLAS_A2 }) }>
+									<Text style = { styles.TLASButtonTitleStyle }>
+										<BodyCopy textString = { this.state.TLAS_Q2 } parentFamily = 'black'/>
+									</Text>
+								</TouchableOpacity>
+								
+								{/* Answer 2 */}
+								{ this.state.showTLAS_A2 && 
+									<Text style = { styles.TLASAnswer }>
+										<BodyCopy textString = { this.state.TLAS_A2 }/>
+									</Text> 
+								}
+
+								{/* Question 3 */}
+								<TouchableOpacity onPress = { () => this.setState({showTLAS_A3: !this.state.showTLAS_A3 }) }>
+									<Text style = { styles.TLASButtonTitleStyle }>
+										<BodyCopy textString = { this.state.TLAS_Q3} parentFamily = 'black'/>
+									</Text>
+								</TouchableOpacity>
+								
+								{/* Answer 3 */}
+								{ this.state.showTLAS_A3 && 
+									<Text style = { styles.TLASAnswer }>
+										<BodyCopy textString = { this.state.TLAS_A3 }/>
+									</Text> 
+								}
 							</View> 
 						</View>
 
@@ -201,7 +219,7 @@ export default class TourStopScreen extends React.Component{
 								title = "Next Stop!"
 								buttonStyle = { styles.buttonStyle }
 								titleStyle = { styles.buttonTitleStyle }
-								//onPress = { () => }
+								onPress = { () => { this.pushNextScreen(this.state.isLastStop )} }
 							/>
 						</View>
 
@@ -210,14 +228,70 @@ export default class TourStopScreen extends React.Component{
 			</ScrollView>
 		)
 	}
+
+	pushNextScreen(isLastStop){
+		this.stop()
+		if(!isLastStop){
+			this.props.navigation.push('Navigation', { screenToLoad: this.state.nextScreen })
+		} else {
+			this.props.navigation.push('EndOfTour')
+		}
+	}
+
+	async generateScreen(screenToLoad){
+		const screenData = await loadScreenData(screenToLoad)
+
+		this.props.navigation.setParams({ title: screenData.navTitle })
+
+		this.setState({
+			navTitle: screenData.navTitle,
+			heroImage: heroImages[screenData.heroImage],
+			header: screenData.header,
+			subheader: screenData.subheader,
+			shortDescription: screenData.shortDescription,
+			fullDescription: screenData.fullDescription,
+			playPauseIcon: 'md-play',
+			TLAS_Q1: screenData.TLAS_Q1,
+			TLAS_Q2: screenData.TLAS_Q2,
+			TLAS_Q3: screenData.TLAS_Q3,
+			TLAS_A1: screenData.TLAS_A1,
+			TLAS_A2: screenData.TLAS_A2,
+			TLAS_A3: screenData.TLAS_A3,
+			imageGalleryContent: screenData.imageGalleryContent,
+			nextScreen: screenData.nextScreen,
+			isLastStop: screenData.isLastStop,
+			screenLoaded: true,
+		})
+
+		this.loadAudio()
+	}
 }
+
+const loadScreenData = (screenToLoad) => new Promise((resolve, reject) => {
+	
+	let fileData = stopScreenData[screenToLoad].default
+
+	let screenData = {
+		navTitle: fileData.navTitle,
+		heroImage: fileData.heroImage,
+		header: fileData.header,
+		subheader: fileData.subheader,
+		shortDescription: fileData.shortDescription,
+		fullDescription: fileData.fullDescription,
+		TLAS_Q1: fileData.TLAS_Q1,
+		TLAS_Q2: fileData.TLAS_Q2,
+		TLAS_Q3: fileData.TLAS_Q3,
+		TLAS_A1: fileData.TLAS_A1,
+		TLAS_A2: fileData.TLAS_A2,
+		TLAS_A3: fileData.TLAS_A3,
+		imageGalleryContent: fileData.imageGallery,
+		nextScreen: fileData.nextScreen,
+		isLastStop: fileData.isLastStop,
+	}
+
+	resolve(screenData)
+})
+
+let currentNavTitle = ''
 
 const soundObject = new Audio.Sound();
-
-const heroImages = {
-	'HeroImage_Mastodons': require('../assets/img/heroImages/HeroImage_Mastodons.png')
-}
-
-const audioFiles = {
-	'Stop: The Mastodons': require('../assets/audioFiles/Mastodons.mp3')
-}

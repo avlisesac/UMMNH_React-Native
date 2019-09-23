@@ -3,6 +3,7 @@ import { Text, View, Image } from 'react-native'
 import Swiper from 'react-native-swiper'
 import colors from '../utils/Colors'
 import styles from '../stylesheets/ImageGalleryScreen'
+import BodyCopy from '../components/BodyCopy'
 
 export default class ImageGalleryScreen extends React.Component{
 
@@ -28,8 +29,6 @@ export default class ImageGalleryScreen extends React.Component{
 		this.state = {
 			imageGalleryContent: galleryContent
 		}
-
-		console.log('===== IMAGE GALLERY CONTENT TO DISPLAY =====\n\n', galleryContent)
 	}
 
 	render(){
@@ -39,7 +38,9 @@ export default class ImageGalleryScreen extends React.Component{
 			return (
 				<View style = { styles.slideView } key = { index } title = {<Text numberOfLines = { 1 }>{ key }</Text>}>
 					<Image style = { styles.slideImage } source = { imageGalleryData[key] } />
-					<Text style = { styles.slideText }>{ key }</Text>
+					<Text style = { styles.slideText }>
+						<BodyCopy textString = { key } />
+					</Text>
 				</View>
 			)
 		})

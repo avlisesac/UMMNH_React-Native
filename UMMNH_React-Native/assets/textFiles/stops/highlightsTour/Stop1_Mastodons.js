@@ -11,6 +11,7 @@ const stopInfo = {
 	TLAS_A1: "A: The male mastadon’s right rear leg might look a bit different. That’s because the scientists at the museum left this 3D printed bone partially unfinished. They wanted to give visitors a look at how they create model bones. If you look closely, you might notice a slight 'Pixelated' appearance that shows the polygonal modeling. This right leg is actually a copy of the left leg that they scanned in and mirrored to create a missing piece!",
 	TLAS_A2: "A: While you might think that humans killed this male mastodon, it was actually much more likely another male in a fight over a female. This male has a hole in his skull near his jaw that was probably made by the other male’s tusk.",
 	TLAS_A3: "A: On the ribs of the male mastodon, you can observe some cut marks that were made by human tools. After this mastodon was felled by a competing male, humans likely found the body and harvested meat from it. You can also see some severed toes where humans chopped right through.",
+	nextScreen: "Stop2_FossilPrepLab",
 	imageGallery: {
 		'Installing the trail of mastodon prints.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_01.png'),
 		'Pieces of the Mastodon display layed out and labeled.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_02.png'),
@@ -18,7 +19,8 @@ const stopInfo = {
 		'Map showing the location of the Owosso mastodon dig site.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_04.png'),
 		'Newspaper clipping of the discovery of a mastodon in a local barnyard': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_05.png'),
 		'Dr. Dan Fisher displays a mastodon jawbone.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_06.png'),
-	}
+	},
+	isLastStop: false 
 }
 
 export default stopInfo

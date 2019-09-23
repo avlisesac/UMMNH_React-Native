@@ -28,6 +28,8 @@ export default class HomeScreen extends React.Component {
   	      'whitney-black' : require ('../assets/fonts/Whitney-Black.otf'),
   	      'whitney-medium' : require ('../assets/fonts/Whitney-Medium.otf'),
   	      'whitney-semibold' : require ('../assets/fonts/Whitney-Semibold.otf'),
+          'whitney-medium-italic': require ('../assets/fonts/Whitney-MediumItal.otf'),
+          'whitney-black-italic': require('../assets/fonts/Whitney-BlackItal.otf'),
   	    });
   	    this.setState({fontLoaded: true});
 
