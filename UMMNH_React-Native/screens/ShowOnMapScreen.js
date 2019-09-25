@@ -3,6 +3,7 @@ import { Text, Image, View, ScrollView } from 'react-native'
 import mapImages from '../utils/ShowOnMapImages'
 import styles from '../stylesheets/ShowOnMapScreen'
 import colors from '../utils/Colors'
+import PinchableImage from '../components/PinchableImage'
 
 export default class ShowOnMapScreen extends React.Component {
 
@@ -41,7 +42,8 @@ export default class ShowOnMapScreen extends React.Component {
 			return <Text>Loading...</Text>
 		}
 		return(
-			<Image style = { styles.mapImage } source = { this.state.mapImage } />
+			<PinchableImage image = { this.state.mapImage }/>
+			//<Image style = { styles.mapImage } source = { this.state.mapImage } />
 		)
 	}
 }

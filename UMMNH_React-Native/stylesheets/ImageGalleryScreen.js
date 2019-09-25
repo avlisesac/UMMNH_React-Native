@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: '100%',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		backgroundColor: 'white'
 	},
 	slideImage: {
 		flex: 1,
@@ -34,6 +35,11 @@ const styles = StyleSheet.create({
 			height: 1.5
 		},
 		textShadowRadius: 1,
+	},
+	testView: {
+		backgroundColor: 'red',
+		width: '100%',
+		height: '100%',
 	}
 })
 

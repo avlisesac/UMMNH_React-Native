@@ -1,11 +1,16 @@
 import React from 'react'
-import { Text, View, Image } from 'react-native'
+import { Animated, Text, View, Image, Dimensions } from 'react-native'
 import Swiper from 'react-native-swiper'
 import colors from '../utils/Colors'
 import styles from '../stylesheets/ImageGalleryScreen'
 import BodyCopy from '../components/BodyCopy'
+import PinchableImage from '../components/PinchableImage'
+import { PanGestureHandler, PinchGestureHandler, RotationGestureHandler, State } from 'react-native-gesture-handler'
+
 
 export default class ImageGalleryScreen extends React.Component{
+	panRef = React.createRef()
+	pinchRef = React.createRef()
 
 	static navigationOptions = ({navigation}) => ({
 		headerStyle: {
@@ -26,10 +31,16 @@ export default class ImageGalleryScreen extends React.Component{
 
 		let galleryContent = this.props.navigation.getParam('imageGalleryContent')
 
+		let { width, height } = Dimensions.get('window')
+
 		this.state = {
-			imageGalleryContent: galleryContent
+			imageGalleryContent: galleryContent,
+			screenWidth: width,
+			screenHeight: height,
 		}
 	}
+
+	pinZoomLayoutRef = React.createRef()
 
 	render(){
 		const imageGalleryData = this.state.imageGalleryContent
@@ -37,7 +48,7 @@ export default class ImageGalleryScreen extends React.Component{
 		let slides = Object.keys(imageGalleryData).map( (key, index) => {
 			return (
 				<View style = { styles.slideView } key = { index } title = {<Text numberOfLines = { 1 }>{ key }</Text>}>
-					<Image style = { styles.slideImage } source = { imageGalleryData[key] } />
+					<PinchableImage style = { { flex: 1, } } image = { imageGalleryData[key] } />
 					<Text style = { styles.slideText }>
 						<BodyCopy textString = { key } />
 					</Text>
