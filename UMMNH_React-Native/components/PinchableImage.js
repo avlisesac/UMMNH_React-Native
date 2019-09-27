@@ -52,10 +52,6 @@ export class PinchableImage extends React.Component {
       this._lastScale *= event.nativeEvent.scale;
       this._baseScale.setValue(this._lastScale);
       this._pinchScale.setValue(1);
-      console.log('scale:', this._scale)
-      console.log('last scale:', this._lastScale)
-      console.log('base scale:', this._baseScale)
-      console.log('pinch scale:', this._pinchScale)
     }
   };
 
@@ -67,8 +63,6 @@ export class PinchableImage extends React.Component {
   		this._translateX.setValue(0)
   		this._translateY.setOffset(this._lastOffset.y)
   		this._translateY.setValue(0)
-  		console.log('translateX:', this._translateX)
-  		console.log('translateY', this._translateY)
   	}
   }
 

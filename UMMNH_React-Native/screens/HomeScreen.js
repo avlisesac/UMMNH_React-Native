@@ -82,6 +82,7 @@ export default class HomeScreen extends React.Component {
     		            title = "Map" 
     		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
     		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
+                    onPress = { () => this.props.navigation.push('ShowOnMap', { imageToShow: 'Blank', headerColor: colors.ummnhLightBlue }) }
                   />
     		        </View>
     		        <View style = {{paddingBottom: 20}}>

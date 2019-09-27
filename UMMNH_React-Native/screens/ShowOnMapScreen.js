@@ -10,7 +10,7 @@ export default class ShowOnMapScreen extends React.Component {
 	static navigationOptions = ({navigation}) => ({
 		title: '',
 		headerStyle: {
-			backgroundColor: colors.ummnhLightRed
+			backgroundColor: navigation.state.params.headerColor
 		},
 		headerTitleStyle: {
 			color: colors.ummnhDarkBlue

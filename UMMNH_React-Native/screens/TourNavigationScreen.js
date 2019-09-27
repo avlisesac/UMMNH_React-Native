@@ -91,7 +91,7 @@ class TourNavigationScreen extends React.Component {
 									title = 'Show on Map'
 									buttonStyle = { styles.buttonStyle }
 									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.props.navigation.push('ShowOnMap', { imageToShow: this.state.mapImage })}
+									onPress = { () => this.props.navigation.push('ShowOnMap', { imageToShow: this.state.mapImage, headerColor: colors.ummnhLightRed })}
 								/>
 								<Button 
 									title = 'Found It!'
