@@ -31,26 +31,16 @@ export default class App extends React.Component {
 
   constructor(props){
     super(props)
-
-    
-  
-    //this.testFirebase()
   }
 
   componentDidMount(){
     this.registerForPushNotificationsAsync()
   }
 
-  testFirebase(){
-    firebase.database().ref('testing').push().set({
-      testKey: 'testValue2'
-    })
-  }
-
   registerForPushNotificationsAsync = async () => {
 
     if(!firebase.apps.length){
-      firebase.initializeApp(firebaseConfig)  
+      firebase.initializeApp(Constants.manifest.extra.firebaseConfig)  
     }
 
 
@@ -116,11 +106,4 @@ const RootStack = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(RootStack)
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAa1-eShBMSFibRj350uTL5NSzHNROETwg",
-  authDomain: "ummnh-app.firebaseapp.com",
-  databaseURL: "https://ummnh-app.firebaseio.com",
-  storageBucket: "ummnh-app.appspot.com",
-}
 
