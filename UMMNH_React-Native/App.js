@@ -1,8 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native'
+import { Notifications } from 'expo'
 import { createStackNavigator, createAppContainer, StackActions } from 'react-navigation'
 import { useScreens } from 'react-native-screens'
+import Constants from 'expo-constants'
+
 import * as firebase from 'firebase'
+import * as Permissions from 'expo-permissions'
+
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import HighlightsTourPreview from './screens/HighlightsTourPreview';
@@ -14,22 +19,74 @@ import ImageGalleryScreen from './screens/ImageGalleryScreen'
 import TodayAtUMMNHScreen from './screens/TodayAtUMMNHScreen'
 import EndOfTourScreen from './screens/EndOfTourScreen'
 
+const YOUR_PUSH_TOKEN = '';
+
 useScreens()
 
-export default class  App  extends React.Component {
+export default class App extends React.Component {
+
+  state = {
+    notification: {},
+  }
 
   constructor(props){
     super(props)
 
-    firebase.initializeApp(firebaseConfig)
+    
+  
+    //this.testFirebase()
+  }
 
-    this.testFirebase()
+  componentDidMount(){
+    this.registerForPushNotificationsAsync()
   }
 
   testFirebase(){
     firebase.database().ref('testing').push().set({
       testKey: 'testValue2'
     })
+  }
+
+  registerForPushNotificationsAsync = async () => {
+
+    if(!firebase.apps.length){
+      firebase.initializeApp(firebaseConfig)  
+    }
+
+
+    if(Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      )
+
+      let finalStatus = existingStatus
+      
+      if(existingStatus !== 'granted'){
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        )
+        finalStatus = status
+      }
+
+      if(finalStatus !== 'granted'){
+        console.log('access not granted for push notifs')
+      }
+
+      let token = await Notifications.getExpoPushTokenAsync()
+      let deviceID = Constants.installationId
+      let targetDB = firebase.database().ref('testing/' + deviceID)
+
+      console.log('device id:', deviceID)
+      console.log('expo push token:', token)
+
+      targetDB.set({
+        pushToken: token
+      })
+      
+
+    } else {
+      alert('Must use physical device for Push Notifications')
+    }
   }
 
   render(){
