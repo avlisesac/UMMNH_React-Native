@@ -5,8 +5,9 @@ import { createStackNavigator, createAppContainer, StackActions } from 'react-na
 import { useScreens } from 'react-native-screens'
 import Constants from 'expo-constants'
 
-import * as firebase from 'firebase'
 import * as Permissions from 'expo-permissions'
+
+import { firebaseApp } from './firebase-config.js'
 
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
@@ -39,9 +40,13 @@ export default class App extends React.Component {
 
   registerForPushNotificationsAsync = async () => {
 
+
+
+    /*
     if(!firebase.apps.length){
       firebase.initializeApp(Constants.manifest.extra.firebaseConfig)  
     }
+    */
 
 
     if(Constants.isDevice) {
@@ -64,7 +69,7 @@ export default class App extends React.Component {
 
       let token = await Notifications.getExpoPushTokenAsync()
       let deviceID = Constants.installationId
-      let targetDB = firebase.database().ref('pushTokens/' + deviceID)
+      let targetDB = firebaseApp.database().ref('pushTokens/' + deviceID)
 
       console.log('device id:', deviceID)
       console.log('expo push token:', token)

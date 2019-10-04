@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
+//import 'firebase/analytics';
+import Constants from 'expo-constants';
 
-const config = {
-	
-}
+
+firebase.initializeApp(Constants.manifest.extra.firebaseConfig);
