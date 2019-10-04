@@ -64,7 +64,7 @@ export default class App extends React.Component {
 
       let token = await Notifications.getExpoPushTokenAsync()
       let deviceID = Constants.installationId
-      let targetDB = firebase.database().ref('testing/' + deviceID)
+      let targetDB = firebase.database().ref('pushTokens/' + deviceID)
 
       console.log('device id:', deviceID)
       console.log('expo push token:', token)
