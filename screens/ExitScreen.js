@@ -3,6 +3,7 @@ import { Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import styles from '../stylesheets/ExitScreen'
 import colors from '../utils/Colors'
+import { firebaseApp } from '../firebase-config'
 
 export default class ExitScreen extends React.Component {
 
@@ -20,6 +21,31 @@ export default class ExitScreen extends React.Component {
 		headerTintColor: colors.ummnhDarkBlue
 	});
 
+	logAndExit = () => {
+		const { navigation } = this.props
+		console.log(navigation)
+		const dbKey = navigation.getParam('cameFromScreen')
+		console.log(dbKey)
+
+		let targetDB = firebaseApp.database().ref('analytics/left-tour-before-end/')
+
+		let incrementValue = targetDB.once('value').then(function(snapshot){
+			
+			let currentValue = snapshot.val()[dbKey]
+
+			let newValue = currentValue + 1
+
+			console.log("this page's exit count:", currentValue)
+			
+			targetDB.update({
+				[dbKey]: newValue
+			})
+			
+		})
+
+		this.props.navigation.popToTop()
+	}
+
 	render(){
 		return(
 			<View style = { styles.mainContainer }>
@@ -29,7 +55,7 @@ export default class ExitScreen extends React.Component {
 						title = "Yes"
 						buttonStyle = { styles.buttonStyle }
 						titleStyle = { styles.yesButtonTitleStyle }
-						onPress = { () => this.props.navigation.popToTop() }
+						onPress = { () => this.logAndExit() }
 					/>
 					<Button
 						title = "No"

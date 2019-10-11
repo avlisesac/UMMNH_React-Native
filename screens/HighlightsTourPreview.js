@@ -6,7 +6,10 @@ import { Ionicons } from '@expo/vector-icons'
 import styles from '../stylesheets/HighlightsTourPreview'
 import colors from '../utils/Colors'
 import fontSizes from '../utils/FontSizes'
+import preventDoubleClick from '../utils/preventDoubleClick'
 import BodyCopy from '../components/BodyCopy'
+
+const ButtonEx = preventDoubleClick(Button)
 
 export default class HightlightsTourPreview extends React.Component {
 	static navigationOptions = {
@@ -50,7 +53,7 @@ export default class HightlightsTourPreview extends React.Component {
 					{/*Lower Area*/}
 					<View style = { styles.lowerContent }>
 						<View style = { styles.buttonContainer }>
-							<Button 
+							<ButtonEx 
       			            	title = "Let's Go!" 
       			            	buttonStyle = { styles.buttonStyle } 
       			            	titleStyle = { styles.buttonTitleStyle }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { Audio } from 'expo-av'
@@ -7,9 +7,14 @@ import styles from '../stylesheets/TourStopScreen'
 import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
 import BodyCopy from '../components/BodyCopy'
+import LoadingIndicator from '../components/LoadingIndicator'
 import heroImages from '../utils/HeroImages'
 import audioFiles from '../utils/AudioFiles'
 import stopScreenData from '../utils/StopScreenData'
+import preventDoubleClick from '../utils/preventDoubleClick'
+import { firebaseApp } from '../firebase-config'
+
+const ButtonEx = preventDoubleClick(Button)
 
 export default class TourStopScreen extends React.Component{
 
@@ -31,7 +36,7 @@ export default class TourStopScreen extends React.Component{
 				title = "Exit"
 				buttonStyle = { styles.exitButtonStyle }
 				titleStyle = { styles.exitButtonTitleStyle }
-				onPress = { () => navigation.push('Exit') }
+				onPress = { () => navigation.push('Exit', { cameFromScreen: navigation.state.params.screenToLoad }) }
 			/>
 		)
 	});
@@ -57,6 +62,31 @@ export default class TourStopScreen extends React.Component{
 		this.state = ({
 			screenLoaded: false,
 			audioLoaded: false
+		})
+
+		this.logAnalytics()
+	}
+
+	logAnalytics = () => {
+		const { navigation } = this.props
+		const screenName = navigation.getParam('screenToLoad')
+		const dbKey = "Stop_" + screenName
+		console.log(dbKey)
+
+		let targetDB = firebaseApp.database().ref('analytics/screen-viewed/')
+
+		let incrementValue = targetDB.once('value').then(function(snapshot){
+			
+			let currentValue = snapshot.val()[dbKey]
+
+			let newValue = currentValue + 1
+
+			console.log("this page's view count:", currentValue)
+			
+			targetDB.update({
+				[dbKey]: newValue
+			})
+			
 		})
 	}
 
@@ -100,132 +130,130 @@ export default class TourStopScreen extends React.Component{
 		/*-----LOADING-----*/
 		if(!this.state.screenLoaded || !this.state.audioLoaded || this.props.navigation.getParam('title') !== this.state.navTitle){
 			return(
-				<View style = { styles.loadingContainer }>
-					<ActivityIndicator size = 'large' />
-					<Text style = { styles.loadingText }>Loading...</Text>
-				</View>
+				<LoadingIndicator />
 			)
 		}
 
 		/*-----LOADED-----*/
 		return(
-			<ScrollView contentContainerStyle = { styles.ScrollView }>
-				<View style = { styles.view }>
-					<View style = { styles.mainContainer }>
-						<View style = { styles.heroHolder }>
-							<Image style = { styles.heroImage } source = { this.state.heroImage }/>
-							<Button
-								title = "Image Gallery"
-								buttonStyle = { styles.imageGalleryButtonStyle }
-								titleStyle = { styles.buttonTitleStyle }
-								onPress = { () => this.props.navigation.push('ImageGallery', { imageGalleryContent: this.state.imageGalleryContent } )}
-							/>
-						</View>
-
-						<Text style = { styles.header }>{ this.state.header }</Text>
-
-						<View style = { styles.subheaderContainer }>
-							<Ionicons name = 'md-bulb' size = { fontSizes.subheaderSize } color = { colors.ummnhDarkRed } />
-							<Text style = { styles.subheader }>{ this.state.subheader }</Text>
-						</View>
-
-						<Text style = { styles.shortDescription }>
-							<BodyCopy textString = { this.state.shortDescription }/>
-						</Text>
-
-						<View style = { styles.audioTourContainer }>
-							<Text style = { styles.audioTourHeader }>Audio Tour</Text>
-							<View style = { styles.audioTourButtonContainer }>
-								<Button
-									icon = {{name:  this.state.playPauseIcon , type: 'ionicon', size: fontSizes.subheaderSize, color: colors.ummnhDarkBlue, iconStyle: {marginRight: 10, marginLeft: 10}}} 
-									buttonStyle = { styles.buttonStyle }
+			<SafeAreaView style = { styles.safeAreaView }>
+				<ScrollView contentContainerStyle = { styles.ScrollView }>
+					<View style = { styles.view }>
+						<View style = { styles.mainContainer }>
+							<View style = { styles.heroHolder }>
+								<Image style = { styles.heroImage } source = { this.state.heroImage }/>
+								<ButtonEx
+									title = "Image Gallery"
+									buttonStyle = { styles.imageGalleryButtonStyle }
 									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.playPause()}
+									onPress = { () => this.props.navigation.push('ImageGallery', { imageGalleryContent: this.state.imageGalleryContent } )}
 								/>
-								<Button
-									icon = {{name: 'md-square', type: 'ionicon', size: fontSizes.subheaderSize, color: colors.ummnhDarkBlue, iconStyle: {marginRight: 10, marginLeft: 10}}} 
+							</View>
+
+							<Text style = { styles.header }>{ this.state.header }</Text>
+
+							<View style = { styles.subheaderContainer }>
+								<Ionicons name = 'md-bulb' size = { fontSizes.subheaderSize } color = { colors.ummnhDarkRed } />
+								<Text style = { styles.subheader }>{ this.state.subheader }</Text>
+							</View>
+
+							<Text style = { styles.shortDescription }>
+								<BodyCopy textString = { this.state.shortDescription }/>
+							</Text>
+
+							<View style = { styles.audioTourContainer }>
+								<Text style = { styles.audioTourHeader }>Audio Tour</Text>
+								<View style = { styles.audioTourButtonContainer }>
+									<Button
+										icon = {{name:  this.state.playPauseIcon , type: 'ionicon', size: fontSizes.subheaderSize, color: colors.ummnhDarkBlue, iconStyle: {marginRight: 10, marginLeft: 10}}} 
+										buttonStyle = { styles.buttonStyle }
+										titleStyle = { styles.buttonTitleStyle }
+										onPress = { () => this.playPause()}
+									/>
+									<Button
+										icon = {{name: 'md-square', type: 'ionicon', size: fontSizes.subheaderSize, color: colors.ummnhDarkBlue, iconStyle: {marginRight: 10, marginLeft: 10}}} 
+										buttonStyle = { styles.buttonStyle }
+										titleStyle = { styles.buttonTitleStyle }
+										onPress = { () => this.stop() }
+									/>
+									<Button
+										title = 'Show/Hide Text'
+										buttonStyle = { styles.buttonStyle }
+										titleStyle = { styles.buttonTitleStyle }
+										onPress = { () => this.setState({showFullDescription: !this.state.showFullDescription})}
+									/>
+								</View>
+							</View>
+
+							{/* Full Description */}
+							{ this.state.showFullDescription && 
+								<Text style = { styles.fullDescription }>
+									<BodyCopy textString = { this.state.fullDescription }/>
+								</Text>
+							}
+
+							<View style = { styles.TLASContainer }>
+								<Text style = { styles.TLASHeader }>Think Like a Scientist</Text>
+								<Text style = { styles.TLASSubheader }>(Tap on a question to view answer)</Text>
+
+								<View style = { styles.TLASQuestionHolder }>
+
+									{/* Question 1 */}
+									<TouchableOpacity onPress = { () => this.setState({showTLAS_A1: !this.state.showTLAS_A1 }) }>
+										<Text style = { styles.TLASButtonTitleStyle }>
+											<BodyCopy textString = { this.state.TLAS_Q1 } parentFamily = 'black'/>
+										</Text>
+									</TouchableOpacity>
+
+									{/* Answer 1 */}
+									{ this.state.showTLAS_A1 && 
+										<Text style = { styles.TLASAnswer }>
+											<BodyCopy textString = { this.state.TLAS_A1 }/>
+										</Text> 
+									}
+
+									{/* Question 2 */}
+									<TouchableOpacity onPress = { () => this.setState({showTLAS_A2: !this.state.showTLAS_A2 }) }>
+										<Text style = { styles.TLASButtonTitleStyle }>
+											<BodyCopy textString = { this.state.TLAS_Q2 } parentFamily = 'black'/>
+										</Text>
+									</TouchableOpacity>
+									
+									{/* Answer 2 */}
+									{ this.state.showTLAS_A2 && 
+										<Text style = { styles.TLASAnswer }>
+											<BodyCopy textString = { this.state.TLAS_A2 }/>
+										</Text> 
+									}
+
+									{/* Question 3 */}
+									<TouchableOpacity onPress = { () => this.setState({showTLAS_A3: !this.state.showTLAS_A3 }) }>
+										<Text style = { styles.TLASButtonTitleStyle }>
+											<BodyCopy textString = { this.state.TLAS_Q3} parentFamily = 'black'/>
+										</Text>
+									</TouchableOpacity>
+									
+									{/* Answer 3 */}
+									{ this.state.showTLAS_A3 && 
+										<Text style = { styles.TLASAnswer }>
+											<BodyCopy textString = { this.state.TLAS_A3 }/>
+										</Text> 
+									}
+								</View> 
+							</View>
+
+							<View style = { styles.buttonContainer }>
+								<ButtonEx 
+									title = "Next Stop!"
 									buttonStyle = { styles.buttonStyle }
 									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.stop() }
-								/>
-								<Button
-									title = 'Show/Hide Text'
-									buttonStyle = { styles.buttonStyle }
-									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.setState({showFullDescription: !this.state.showFullDescription})}
+									onPress = { () => { this.pushNextScreen(this.state.isLastStop )} }
 								/>
 							</View>
 						</View>
-
-						{/* Full Description */}
-						{ this.state.showFullDescription && 
-							<Text style = { styles.fullDescription }>
-								<BodyCopy textString = { this.state.fullDescription }/>
-							</Text>
-						}
-
-						<View style = { styles.TLASContainer }>
-							<Text style = { styles.TLASHeader }>Think Like a Scientist</Text>
-							<Text style = { styles.TLASSubheader }>(Tap on a question to view answer)</Text>
-
-							<View style = { styles.TLASQuestionHolder }>
-
-								{/* Question 1 */}
-								<TouchableOpacity onPress = { () => this.setState({showTLAS_A1: !this.state.showTLAS_A1 }) }>
-									<Text style = { styles.TLASButtonTitleStyle }>
-										<BodyCopy textString = { this.state.TLAS_Q1 } parentFamily = 'black'/>
-									</Text>
-								</TouchableOpacity>
-
-								{/* Answer 1 */}
-								{ this.state.showTLAS_A1 && 
-									<Text style = { styles.TLASAnswer }>
-										<BodyCopy textString = { this.state.TLAS_A1 }/>
-									</Text> 
-								}
-
-								{/* Question 2 */}
-								<TouchableOpacity onPress = { () => this.setState({showTLAS_A2: !this.state.showTLAS_A2 }) }>
-									<Text style = { styles.TLASButtonTitleStyle }>
-										<BodyCopy textString = { this.state.TLAS_Q2 } parentFamily = 'black'/>
-									</Text>
-								</TouchableOpacity>
-								
-								{/* Answer 2 */}
-								{ this.state.showTLAS_A2 && 
-									<Text style = { styles.TLASAnswer }>
-										<BodyCopy textString = { this.state.TLAS_A2 }/>
-									</Text> 
-								}
-
-								{/* Question 3 */}
-								<TouchableOpacity onPress = { () => this.setState({showTLAS_A3: !this.state.showTLAS_A3 }) }>
-									<Text style = { styles.TLASButtonTitleStyle }>
-										<BodyCopy textString = { this.state.TLAS_Q3} parentFamily = 'black'/>
-									</Text>
-								</TouchableOpacity>
-								
-								{/* Answer 3 */}
-								{ this.state.showTLAS_A3 && 
-									<Text style = { styles.TLASAnswer }>
-										<BodyCopy textString = { this.state.TLAS_A3 }/>
-									</Text> 
-								}
-							</View> 
-						</View>
-
-						<View style = { styles.buttonContainer }>
-							<Button 
-								title = "Next Stop!"
-								buttonStyle = { styles.buttonStyle }
-								titleStyle = { styles.buttonTitleStyle }
-								onPress = { () => { this.pushNextScreen(this.state.isLastStop )} }
-							/>
-						</View>
-
 					</View>
-				</View>
-			</ScrollView>
+				</ScrollView>
+			</SafeAreaView>
 		)
 	}
 

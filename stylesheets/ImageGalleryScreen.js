@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
 	slideImage: {
 		flex: 1,
 		width: '100%',
-		//backgroundColor: 'grey',
 		resizeMode: 'contain'
 	},
 	slideText: {
@@ -40,7 +39,11 @@ const styles = StyleSheet.create({
 		backgroundColor: 'red',
 		width: '100%',
 		height: '100%',
-	}
+	},
+	safeAreaView: {
+		flex: 1,
+		//backgroundColor: 'red',
+	},
 })
 
 export default styles

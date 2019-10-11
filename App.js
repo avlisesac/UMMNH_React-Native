@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native'
-import { Notifications } from 'expo'
+import { View, Text, AsyncStorage } from 'react-native'
+import { Notifications, ScreenOrientation, AppLoading } from 'expo'
 import { createStackNavigator, createAppContainer, StackActions } from 'react-navigation'
 import { useScreens } from 'react-native-screens'
 import Constants from 'expo-constants'
 
 import * as Permissions from 'expo-permissions'
+import { Asset } from 'expo-asset'
+import * as Font from 'expo-font';
 
-import { firebaseApp } from './firebase-config.js'
+import { firebaseApp } from './firebase-config'
 
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
@@ -23,11 +25,24 @@ import EndOfTourScreen from './screens/EndOfTourScreen'
 const YOUR_PUSH_TOKEN = '';
 
 useScreens()
+changeScreenOrientation()
+
+cacheFonts = (fonts) => {
+    console.log('trying to load fonts...')
+    return fonts.map(font => Font.loadAsync(font))
+}
+
+cacheImages = (images) => {
+  return images.map(image => {
+    return Asset.fromModule(image).downloadAsync()
+  })
+}
 
 export default class App extends React.Component {
 
   state = {
     notification: {},
+    isReady: false,
   }
 
   constructor(props){
@@ -36,18 +51,42 @@ export default class App extends React.Component {
 
   componentDidMount(){
     this.registerForPushNotificationsAsync()
+    this.checkForFirstLaunch()
+  }
+
+  checkForFirstLaunch = async () => {
+    AsyncStorage.getItem("hasLaunched").then(value => {
+      if(value == null){
+        AsyncStorage.setItem("hasLaunched", "true")
+        let targetDB = firebaseApp.database().ref('analytics/')
+
+        let incrementValue = targetDB.once('value').then(function(snapshot){
+
+          //Get current count
+          let currentValue = snapshot.val()['first-launch']
+
+          console.log(currentValue, typeof currentValue)
+
+
+          //Increment by one
+          let newValue = currentValue += 1
+
+          console.log(newValue)
+
+          //Set as new DB value
+          targetDB.update({
+            ['first-launch']: newValue
+          })
+
+        })
+
+      } else {
+        console.log('not first launch')
+      }
+    })
   }
 
   registerForPushNotificationsAsync = async () => {
-
-
-
-    /*
-    if(!firebase.apps.length){
-      firebase.initializeApp(Constants.manifest.extra.firebaseConfig)  
-    }
-    */
-
 
     if(Constants.isDevice) {
       const { status: existingStatus } = await Permissions.getAsync(
@@ -80,14 +119,43 @@ export default class App extends React.Component {
       
 
     } else {
-      alert('Must use physical device for Push Notifications')
+      //alert('Must use physical device for Push Notifications')
     }
   }
 
   render(){
+    if(!this.state.isReady){
+      return (
+        <AppLoading
+          startAsync = { this._loadAssetsAsync }
+          onFinish = { () => this.setState({ isReady: true })}
+          onError = { console.warn }
+        />
+      )
+    }
+
     return (
       <AppContainer />
     );
+  }
+
+  _loadAssetsAsync = async () => {
+    
+    const fontAssets = cacheFonts([
+      { 'whitney-black' : require ('./assets/fonts/Whitney-Black.otf') },
+      { 'whitney-medium' : require ('./assets/fonts/Whitney-Medium.otf') },
+      { 'whitney-semibold' : require ('./assets/fonts/Whitney-Semibold.otf') },
+      { 'whitney-medium-italic': require ('./assets/fonts/Whitney-MediumItal.otf') },
+      { 'whitney-black-italic': require('./assets/fonts/Whitney-BlackItal.otf') },
+    ])
+
+    const imageAssets = cacheImages([
+      require('./assets/img/home_message.png'),
+      require('./assets/img/home_background.png'),
+      require('./assets/img/HeroImage_Doli.png'),
+    ])
+
+    await Promise.all([...fontAssets, ...imageAssets])
   }
 }
 
@@ -111,4 +179,8 @@ const RootStack = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(RootStack)
+
+async function changeScreenOrientation(){
+  await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+}
 

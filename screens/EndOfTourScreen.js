@@ -1,10 +1,16 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
+import * as WebBrowser from 'expo-web-browser';
 import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
+import links from '../utils/Links'
+import preventDoubleClick from '../utils/preventDoubleClick'
+import { firebaseApp } from '../firebase-config'
 
-export default class EndOfTourScreen extends React.Component {
+const ButtonEx = preventDoubleClick(Button)
+
+class EndOfTourScreen extends React.Component {
 
 	static navigationOptions = {
 		title: "End of Tour",
@@ -19,6 +25,30 @@ export default class EndOfTourScreen extends React.Component {
 		headerBackTitleStyle: {
 			color: colors.ummnhDarkBlue
 		}
+	};
+
+	constructor(props){
+		super(props)
+		
+		this.logAnalytics()
+	}
+
+	logAnalytics = () => {
+		let targetDB = firebaseApp.database().ref('analytics/')
+
+		let incrementValue = targetDB.once('value').then(function(snapshot){
+			
+			let currentValue = snapshot.val()['finished-tour']
+
+			let newValue = currentValue + 1
+
+			console.log("this page's view count:", currentValue)
+			
+			targetDB.update({
+				['finished-tour']: newValue
+			})
+			
+		})
 	}
 
 	render() {
@@ -32,16 +62,26 @@ export default class EndOfTourScreen extends React.Component {
 
 				<Text style = { [styles.cta, styles.allCopy] }>Be sure to come back in November for our second Grand Opening!</Text>
 				<View style = { styles.buttonContainer }>
-					<Button
+					<ButtonEx
 						title = 'Home'
 						buttonStyle = { styles.buttonStyle }
 						titleStyle = { styles.buttonTitleStyle }
 						onPress = { () => this.props.navigation.popToTop() }
 					/>
+					<ButtonEx
+						title = 'Make a Donation'
+						buttonStyle = { styles.buttonStyle }
+						titleStyle = { styles.buttonTitleStyle }
+						onPress = { () => this._openLink(links.donationSite) }
+					/>
 				</View>
 			</View>
 			
 		)
+	}
+
+	_openLink = (link) => {
+		WebBrowser.openBrowserAsync(link);
 	}
 }
 
@@ -76,6 +116,8 @@ const styles = StyleSheet.create({
 	},
 	buttonStyle: {
 		backgroundColor: colors.ummnhYellow,
+		marginTop: 10,
+		marginBottom: 10,
 	},
 	buttonTitleStyle: {
 		fontFamily: 'whitney-black',
@@ -83,3 +125,5 @@ const styles = StyleSheet.create({
 		color: colors.ummnhDarkBlue
 	}
 })
+
+export default EndOfTourScreen

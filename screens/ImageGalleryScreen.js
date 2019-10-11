@@ -1,5 +1,5 @@
 import React from 'react'
-import { Animated, Text, View, Image, Dimensions } from 'react-native'
+import { Animated, Text, View, Image, Dimensions, SafeAreaView } from 'react-native'
 import Swiper from 'react-native-swiper'
 import colors from '../utils/Colors'
 import styles from '../stylesheets/ImageGalleryScreen'
@@ -47,7 +47,7 @@ export default class ImageGalleryScreen extends React.Component{
 
 		let slides = Object.keys(imageGalleryData).map( (key, index) => {
 			return (
-				<View style = { styles.slideView } key = { index } title = {<Text numberOfLines = { 1 }>{ key }</Text>}>
+				<View style = { styles.slideView } key = { index }>
 					<PinchableImage style = { { flex: 1, } } image = { imageGalleryData[key] } />
 					<Text style = { styles.slideText }>
 						<BodyCopy textString = { key } />
@@ -57,9 +57,11 @@ export default class ImageGalleryScreen extends React.Component{
 		})
 
 		return(
-			<Swiper style = { styles.wrapper }  paginationStyle = { {bottom: 5, backgroundColor: 'rgba(255,255,255,0.5)' } } showsButtons = { true } activeDotColor = { 'black' } nextButton = { <Text style={styles.swiperButtonText}>›</Text> } prevButton = { <Text style={styles.swiperButtonText}>‹</Text>} >
-				{ slides }
-			</Swiper>
+			<SafeAreaView style = { styles.safeAreaView }>
+				<Swiper style = { styles.wrapper }  paginationStyle = { {bottom: 5, backgroundColor: 'rgba(255,255,255,0.5)' } } showsButtons = { true } activeDotColor = { 'black' } nextButton = { <Text style={styles.swiperButtonText}>›</Text> } prevButton = { <Text style={styles.swiperButtonText}>‹</Text>} >
+					{ slides }
+				</Swiper>
+			</SafeAreaView>
 		)
 	}
 }

@@ -157,6 +157,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignSelf: 'center'
 	},
+	safeAreaView: {
+		flex: 1,
+	}
 })
 
 export default styles

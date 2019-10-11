@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: undefined,
     width: undefined,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   menuContainer: {
     backgroundColor: 'rgba(255,255,255, 0.9)',
@@ -90,6 +88,12 @@ const styles = StyleSheet.create({
   },
   spacer: {
   	height: 10
+  },
+  safeAreaView: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
 

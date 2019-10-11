@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, Image, View, ScrollView } from 'react-native'
+import { Text, Image, View, ScrollView, SafeAreaView } from 'react-native'
 import mapImages from '../utils/ShowOnMapImages'
 import styles from '../stylesheets/ShowOnMapScreen'
+import LoadingIndicator from '../components/LoadingIndicator'
 import colors from '../utils/Colors'
 import PinchableImage from '../components/PinchableImage'
 
@@ -39,11 +40,14 @@ export default class ShowOnMapScreen extends React.Component {
 
 	render(){
 		if(!this.state.screenInfoPopulated){
-			return <Text>Loading...</Text>
+			return(
+				<LoadingIndicator />
+			)
 		}
 		return(
-			<PinchableImage image = { this.state.mapImage }/>
-			//<Image style = { styles.mapImage } source = { this.state.mapImage } />
+			<SafeAreaView style = { styles.safeAreaView }>
+				<PinchableImage image = { this.state.mapImage }/>
+			</SafeAreaView>
 		)
 	}
 }

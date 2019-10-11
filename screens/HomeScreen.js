@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, StatusBar, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, StatusBar, Image, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-elements';
+import LoadingIndicator from '../components/LoadingIndicator'
 import colors from '../utils/Colors';
 import styles from '../stylesheets/HomeScreen';
-import * as Font from 'expo-font';
+import preventDoubleClick from '../utils/preventDoubleClick'
+
+const ButtonEx = preventDoubleClick(Button)
 
 
 export default class HomeScreen extends React.Component {
@@ -22,39 +25,19 @@ export default class HomeScreen extends React.Component {
 		}
 	}
 
-  	async componentWillMount(){
-  	  try {
-  	    await Font.loadAsync({
-  	      'whitney-black' : require ('../assets/fonts/Whitney-Black.otf'),
-  	      'whitney-medium' : require ('../assets/fonts/Whitney-Medium.otf'),
-  	      'whitney-semibold' : require ('../assets/fonts/Whitney-Semibold.otf'),
-          'whitney-medium-italic': require ('../assets/fonts/Whitney-MediumItal.otf'),
-          'whitney-black-italic': require('../assets/fonts/Whitney-BlackItal.otf'),
-  	    });
-  	    this.setState({fontLoaded: true});
+  pushScreen = (screenToPush) => {
+    this.props.navigation.push(screenToPush)
+  }
 
-  	  } catch (error) {
-  	    console.log('error loading fonts', error)
-  	  }
-  	}
-  	
-	state = {
-    	fontLoaded: false
-  	};
+  pushScreenWithProps = (screenToPush, imageToShow, headerColor) => {
+    this.props.navigation.push(screenToPush, { imageToShow: imageToShow, headerColor: headerColor })
+  }
 
   	render() {
-  	  if (!this.state.fontLoaded) {
-  	    return(
-          <View style = { styles.loadingContainer }>
-            <ActivityIndicator size = 'large' />
-            <Text style = { styles.loadingText }>Loading...</Text>
-          </View>
-        ) 
-  	  }
   	  return (
   	  	<View style={styles.container}>
-    		  {/* <StatusBar hidden /> */}
     		  <ImageBackground style = { styles.backgroundImage } source = {require('../assets/img/home_background.png')}> 
+          <SafeAreaView style = { styles.safeAreaView }>
     		    <View style = {styles.menuContainer}>
               <View style = { styles.welcomeMessageContainer }>
                 <Image source = { require('../assets/img/home_message.png') } style = { styles.welcomeMessageImage }/>
@@ -62,39 +45,40 @@ export default class HomeScreen extends React.Component {
               
     		      <View style = {styles.buttonContainer}>
     		        <View style = {{paddingBottom: 10}}>
-    		          <Button 
+    		          <ButtonEx 
     		            title = "Tours" 
     		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
     		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
-    		            onPress = { () => this.props.navigation.push('Tours')} 
+    		            onPress =  { () => this.pushScreen('Tours') }
                   />
     		        </View>
     		        <View style = {{paddingBottom: 10}}>
-    		          <Button 
+    		          <ButtonEx 
     		            title = "Today @ UMMNH"
     		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
     		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
-                    onPress = { () => this.props.navigation.push('TodayAtUMMNH')}
+                    onPress = { () => this.pushScreen('TodayAtUMMNH')}
                   />
     		        </View>
     		        <View style = {{paddingBottom: 10}}>
-    		          <Button 
+    		          <ButtonEx 
     		            title = "Map" 
     		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
     		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
-                    onPress = { () => this.props.navigation.push('ShowOnMap', { imageToShow: 'Blank', headerColor: colors.ummnhLightBlue }) }
+                    onPress = { () => this.pushScreenWithProps('ShowOnMap','Blank', colors.ummnhLightBlue) }
                   />
     		        </View>
     		        <View style = {{paddingBottom: 20}}>
-    		          <Button 
+    		          <ButtonEx 
     		            title = "About" 
     		            buttonStyle = {{backgroundColor: colors.ummnhYellow }} 
     		            titleStyle = {{fontFamily : "whitney-black", color: "#00274c", fontSize: 22}}
-    		            onPress = {() => this.props.navigation.push('About')}
+    		            onPress = {() => this.pushScreen('About')}
                   />
     		        </View>
     		      </View>
       		  </View>
+            </SafeAreaView>
       	</ImageBackground>
       </View>
   	);  

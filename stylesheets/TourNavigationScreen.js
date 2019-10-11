@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 	buttonTitleStyle: {
 		color: colors.ummnhDarkBlue,
 		fontFamily: 'whitney-black',
-		fontSize: 22
+		fontSize: fontSizes.headerSize
 	},
 	bodyCopy: {
 		fontSize: fontSizes.bodySize,
@@ -105,7 +105,10 @@ const styles = StyleSheet.create({
 		fontFamily: 'whitney-medium',
 		textAlign: 'justify',
 		lineHeight: (fontSizes.bodySize * 1.25)
-	}
+	},
+	safeAreaView: {
+		flex: 1,
+	},
 
 })
 

@@ -36,6 +36,21 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.ummnhYellow,
 		marginRight: 10,
 		width: 60
+	},
+	donationButtonStyle: {
+		backgroundColor: colors.ummnhYellow,
+		width: '66%',
+		alignSelf: 'center',
+		marginBottom: 20,
+	},
+	buttonTitleStyle: {
+		color: colors.ummnhDarkBlue,
+		fontFamily: 'whitney-black',
+		fontSize: fontSizes.headerSize
+	},
+	safeAreaView: {
+		flex: 1,
+		//backgroundColor: 'red'
 	}
 })
 
