@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import colors from '../utils/Colors'
 import fontSizes from '../utils/FontSizes'
+
+const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   loadingContainer: {
@@ -37,18 +39,63 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     width: '66%',
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    //backgroundColor: 'purple',
   },
   welcomeMessageContainer: {
     flex: 1,
+    paddingTop: 10,
     width: '90%',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    //backgroundColor: 'red'
+  },
+  bigWords: {
+    flex: 1,
+    //backgroundColor: 'blue',
+    width: '100%',
+    justifyContent: 'flex-end'
+  },
+  bigWordsInnerContainer: {
+
+  },
+  bigWordsText: {
+    fontFamily: 'whitney-black',
+    color: colors.ummnhLightBlue,
+    textAlign: 'right'
+  },
+  bigBig: {
+    //flex: 2,
+    fontSize: fontSizes.welcomeBigBig
+  },
+  bigNormal: {
+    //flex: 1,
+    fontSize: fontSizes.welcomeBigMed
+  },
+  smallWords: {
+    flex: 1,
+    //backgroundColor: 'green',
+    width: '100%',
+  },
+  smallWordsInnerContainer: {
+
+  },
+  smallWordsText: {
+    color: colors.ummnhDarkBlue,
+    textAlign: 'right',
+    //flex: 1,
+    fontSize: fontSizes.welcomeBody
+  },
+  smallNormal: {
+    fontFamily: 'whitney-medium',
+  },
+  smallBold: {
+    fontFamily: 'whitney-black',
   },
   welcomeMessageImage: {
     flex: 1,
     width: '100%',
     aspectRatio: 486/637,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     marginTop: 10,
   },
   ummnhLightBlue: {

@@ -21,8 +21,8 @@ Our model of <i>Australopithecus sediba</i> is a life-size sculpture made by Day
 	TLAS_A3: `A. Compared to modern humans, <i>Australopithecus sediba</i> was considerably shorter as well as stockier. Their skull was much smaller than our own, meaning that their brain was also smaller. This limited brain size means that while they were likely able to craft simple tools, they did not have any higher-level brain functions.`,
 	nextScreen: "Stop9_Quetz",
 	imageGallery: {
-		"An in-progress shot of the creation of our <i>A. sediba</i> model.": require('../../../../assets/img/galleries/Sediba/Gallery_Sediba_01.png'),
-		"Side-by-side of the finished <i>A. sediba</i> model and her skeleton.": require('../../../../assets/img/galleries/Sediba/Gallery_Sediba_02.png'),
+		"An in-progress shot of the creation of our <i>A. sediba</i> model. © Sculpture Elisabeth Daynès/Photo by S. Entressangle": require('../../../../assets/img/galleries/Sediba/Gallery_Sediba_01.png'),
+		"Side-by-side of the finished <i>A. sediba</i> model and her skeleton. © Sculpture Elisabeth Daynès": require('../../../../assets/img/galleries/Sediba/Gallery_Sediba_02.png'),
 		"A view of 'Lucy', the <i>A. afarensis</i> skeleton that may have been <i>A. sediba's</i> ancestor.": require('../../../../assets/img/galleries/Sediba/Gallery_Sediba_03.png'),
 	},
 	isLastStop: false

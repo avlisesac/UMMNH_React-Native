@@ -4,28 +4,27 @@ import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
 
 const styles = StyleSheet.create({
-	view: {
-		justifyContent: 'center',
+	outerView: {
+		flex: 1,
 		alignItems: 'center',
-		flex: 1
 	},
 	mainContainer: {
-		width: '90%',
 		flex: 1,
+		width: '90%',
 		marginTop: 10,
 		marginBottom: 10,
 	},
 	upperContent: {
-		flex: 2,
+		width: '100%',
 	},
 	lowerContent: {
-		flex: 1,
+		width: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	buttonContainer: {
-		flex: 1,
 		width: '66%',
+		height: 150,
 		justifyContent: 'center',
 		alignItems: 'stretch'
 	},
@@ -46,11 +45,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: null,
 		width: null,
-		resizeMode: 'cover'
+		resizeMode: 'contain'
 	},
 	descriptionContainer: {
 		marginTop: 10,
-		flex: 1,
 	},
 	header: {
 		color: colors.ummnhDarkBlue,
@@ -81,6 +79,9 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		lineHeight: (fontSizes.bodySize * 1.25)
 	},
+	safeAreaView: {
+		flex: 1
+	}
 })
 
 export default styles

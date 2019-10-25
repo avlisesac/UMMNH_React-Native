@@ -47,6 +47,11 @@ export default class App extends React.Component {
 
   constructor(props){
     super(props)
+
+    if(Text.defaultProps == null){
+      Text.defaultProps = {}
+    }
+    Text.defaultProps.allowFontScaling = false;
   }
 
   componentDidMount(){

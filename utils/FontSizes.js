@@ -1,4 +1,7 @@
 import Constants from 'expo-constants'
+import { Dimensions } from 'react-native'
+
+const { width, height } = Dimensions.get('window')
 
 const headerSize = () => {
 	if(isPad()){
@@ -21,11 +24,42 @@ const bodySize = () => {
 	return 17
 }
 
+const welcomeBigBig = () => {
+	/*
+	if(isPad()){
+		return 40
+	}
+	*/
+	return (width / 15)
+}
+
+
+const welcomeBigMed = () => {
+	/*
+	if(isPad()){
+		return 30
+	}
+	*/
+	return (width / 20)
+}
+
+const welcomeBody = () => {
+	/*
+	if(isPad()){
+		return 25
+	}
+	*/
+	return (width / 30) 
+}
+
 
 const fontSizes = {
 	headerSize: headerSize(),
 	subheaderSize: subheaderSize(),
 	bodySize: bodySize(),
+	welcomeBigBig: welcomeBigBig(),
+	welcomeBigMed: welcomeBigMed(),
+	welcomeBody: welcomeBody(),
 }
 
 function isPad(){

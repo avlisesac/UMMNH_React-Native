@@ -23,6 +23,7 @@ Accompanying the <i>Dolichorhynchops</i> are other animals that have come to fee
 		"Adding in the baby <i>Dolichorhynchops</i>.": require('../../../../assets/img/galleries/Doli/Gallery_Doli_02.png'),
 		"Detail view of the mural showing the bait ball of <i>Diplomystus</i> and predatory fish <i>Cimolichthys</i>.": require('../../../../assets/img/galleries/Doli/Gallery_Doli_03.png'),
 		"Another detail view of the mural, this one showing the flightless sea bird <i>Hesperornis</i> at the bait ball.": require('../../../../assets/img/galleries/Doli/Gallery_Doli_04.png'),
+		"A view of the 3D printed fish that help make the bait ball come to life!": require('../../../../assets/img/galleries/Doli/Gallery_Doli_05.png'),
 	},
 	isLastStop: false
 }

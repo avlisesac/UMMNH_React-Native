@@ -40,7 +40,29 @@ export default class HomeScreen extends React.Component {
           <SafeAreaView style = { styles.safeAreaView }>
     		    <View style = {styles.menuContainer}>
               <View style = { styles.welcomeMessageContainer }>
-                <Image source = { require('../assets/img/home_message.png') } style = { styles.welcomeMessageImage }/>
+                {/*<View style = { styles.bigWords }>*/}
+                  <View style = { styles.bigWordsInnerContainer}>
+                    <Text style = { [styles.bigWordsText, styles.bigBig] }>Welcome</Text>
+                    <Text style = { [styles.bigWordsText, styles.bigNormal]}>to the brand new</Text>
+                    <Text style = { [styles.bigWordsText, styles.bigNormal]} >University of Michigan</Text>
+                    <Text style = { [styles.bigWordsText, styles.bigBig] }>Museum of</Text>
+                    <Text style = { [styles.bigWordsText, styles.bigBig] }>Natural History</Text>
+                  </View>
+                {/* </View> */}
+                <View style = { styles.smallWords }>
+                    {/*<View style = { styles.smallWordsInnerContainer }>*/}
+                      <Text style = { [styles.smallWordsText, styles.smallNormal] }>We celebrated our grand opening on</Text>
+                      <Text style = { [styles.smallWordsText, styles.smallBold] }>April 14th, 2019</Text>
+
+                      <Text style = { [styles.smallWordsText, styles.smallNormal] }>Please, enjoy your visit, and be sure to</Text>
+                      <Text style = { [styles.smallWordsText, styles.smallBold] }>come back in November</Text>
+                      <Text style = { [styles.smallWordsText, styles.smallNormal] }>for our More to Explore event.</Text>
+
+                      <Text style = { [styles.smallWordsText, styles.smallNormal] }>There will be more to see, do, and</Text>
+                      <Text style = { [styles.smallWordsText, styles.smallBold] }>discover!</Text>
+                  {/*</View>*/}
+                </View>
+                {/* <Image source = { require('../assets/img/home_message.png') } style = { styles.welcomeMessageImage }/> */}
               </View>
               
     		      <View style = {styles.buttonContainer}>

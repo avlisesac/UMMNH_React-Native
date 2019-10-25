@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, View, Image, SafeAreaView } from 'react-native'
+import { Text, StyleSheet, View, Image, SafeAreaView, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { StackActions } from 'react-navigation'
@@ -94,43 +94,45 @@ class TourNavigationScreen extends React.Component {
 		//--LOADED--
 		return (
 			<SafeAreaView style = { styles.safeAreaView }>
-				<View style = { styles.view }>
-					<View style = { styles.mainContainer }>
-						<View style = { styles.upperArea }>
-							<View style = { styles.swipeContainer }>
-								<Swiper style = { styles.wrapper } showsButtons = { true } activeDotColor = { 'white' } nextButton = { <Text style={styles.buttonText}>›</Text> } prevButton = { <Text style={styles.buttonText}>‹</Text>} >
-									<Image style = { styles.navImage } source = { this.state.navImage_1 }/>
-									<Image style = { styles.navImage } source = { this.state.navImage_2 }/>
-								</Swiper>
-							</View>
+				<ScrollView style = { styles.scrollView }>
+					<View style = { styles.outerView }>
+						<View style = { styles.mainContainer }>
+							<View style = { styles.upperArea }>
+								<View style = { styles.swipeContainer }>
+									<Swiper style = { styles.wrapper } showsButtons = { true } activeDotColor = { 'white' } nextButton = { <Text style={styles.buttonText}>›</Text> } prevButton = { <Text style={styles.buttonText}>‹</Text>} >
+										<Image style = { styles.navImage } source = { this.state.navImage_1 }/>
+										<Image style = { styles.navImage } source = { this.state.navImage_2 }/>
+									</Swiper>
+								</View>
 
-							<Text style = { styles.header }>{this.state.header}</Text>
-							<View style = { styles.subheaderContainer }>
-								<Ionicons name = 'md-pin' size = { fontSizes.subheaderSize } color = { colors.ummnhDarkRed } />
-								<Text style = { styles.subheaderText }>{this.state.subheader}</Text>
+								<Text style = { styles.header }>{this.state.header}</Text>
+								<View style = { styles.subheaderContainer }>
+									<Ionicons name = 'md-pin' size = { fontSizes.subheaderSize } color = { colors.ummnhDarkRed } />
+									<Text style = { styles.subheaderText }>{this.state.subheader}</Text>
+								</View>
+								<Text style = { styles.bodyCopy }>
+									<BodyCopy textString = { this.state.description }/>
+								</Text>
 							</View>
-							<Text style = { styles.bodyCopy }>
-								<BodyCopy textString = { this.state.description }/>
-							</Text>
-						</View>
-						<View style = { styles.lowerArea }>
-							<View style = { styles.buttonContainer }>
-								<ButtonEx 
-									title = 'Show on Map'
-									buttonStyle = { styles.buttonStyle }
-									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.props.navigation.push('ShowOnMap', { imageToShow: this.state.mapImage, headerColor: colors.ummnhLightRed })}
-								/>
-								<ButtonEx 
-									title = 'Found It!'
-									buttonStyle = { styles.buttonStyle }
-									titleStyle = { styles.buttonTitleStyle }
-									onPress = { () => this.pushNextScreen(this.state.nextScreen) /*this.props.navigation.push('TourStop', { propsToSend })*/ }
-								/>
+							<View style = { styles.lowerArea }>
+								<View style = { styles.buttonContainer }>
+									<ButtonEx 
+										title = 'Show on Map'
+										buttonStyle = { styles.buttonStyle }
+										titleStyle = { styles.buttonTitleStyle }
+										onPress = { () => this.props.navigation.push('ShowOnMap', { imageToShow: this.state.mapImage, headerColor: colors.ummnhLightRed })}
+									/>
+									<ButtonEx 
+										title = 'Found It!'
+										buttonStyle = { styles.buttonStyle }
+										titleStyle = { styles.buttonTitleStyle }
+										onPress = { () => this.pushNextScreen(this.state.nextScreen) /*this.props.navigation.push('TourStop', { propsToSend })*/ }
+									/>
+								</View>
 							</View>
 						</View>
 					</View>
-				</View>
+				</ScrollView>
 			</SafeAreaView>
 		);
 	}

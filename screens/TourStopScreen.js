@@ -47,6 +47,8 @@ export default class TourStopScreen extends React.Component{
 
 			await soundObject.loadAsync(audioFiles[this.state.header])
 
+			soundObject.setOnPlaybackStatusUpdate(this._onPlaybackStatusUpdate)
+
 			this.setState({
 				audioLoaded: true
 			})
@@ -161,6 +163,7 @@ export default class TourStopScreen extends React.Component{
 								<BodyCopy textString = { this.state.shortDescription }/>
 							</Text>
 
+						{/*-----Audio Player-----*/}
 							<View style = { styles.audioTourContainer }>
 								<Text style = { styles.audioTourHeader }>Audio Tour</Text>
 								<View style = { styles.audioTourButtonContainer }>
@@ -293,6 +296,32 @@ export default class TourStopScreen extends React.Component{
 
 		this.loadAudio()
 	}
+
+	_onPlaybackStatusUpdate = playbackStatus => {
+	if(!playbackStatus.isLoaded){
+		//console.log('not loaded')
+		if(playbackStatus.error){
+			console.log(`is error: ${playbackStatus.error}`)
+		}
+	} else {
+		//console.log('no error')
+
+		if(playbackStatus.isPlaying){
+			//console.log('playing')
+		} else {
+			//console.log('paused')
+		}
+
+		if(playbackStatus.isBuffering){
+			//console.log('buffering')
+		}
+
+		if(playbackStatus.didJustFinish && !playbackStatus.isLooping){
+			console.log('finished playing')
+			this.stop()
+		}
+	}
+}
 }
 
 const loadScreenData = (screenToLoad) => new Promise((resolve, reject) => {
@@ -323,3 +352,6 @@ const loadScreenData = (screenToLoad) => new Promise((resolve, reject) => {
 let currentNavTitle = ''
 
 const soundObject = new Audio.Sound();
+
+
+

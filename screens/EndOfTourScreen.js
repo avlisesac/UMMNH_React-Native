@@ -60,7 +60,7 @@ class EndOfTourScreen extends React.Component {
 					You've reached the end of the Highlights Tour. We hope you've enjoyed your time at the new University of Michigan Museum of Natural History. Be on the lookout for more tours to be added as we settle in to our new space. Hopefully your visit has taught you about the earth and its history, and we hope you're hungry for more!
 				</Text>
 
-				<Text style = { [styles.cta, styles.allCopy] }>Be sure to come back in November for our second Grand Opening!</Text>
+				<Text style = { [styles.cta, styles.allCopy] }>Be sure to come back in November for our second More to Explore event!</Text>
 				<View style = { styles.buttonContainer }>
 					<ButtonEx
 						title = 'Home'

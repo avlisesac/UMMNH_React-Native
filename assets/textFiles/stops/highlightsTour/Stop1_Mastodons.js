@@ -19,6 +19,7 @@ const stopInfo = {
 		'Map showing the location of the Owosso mastodon dig site.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_04.png'),
 		'Newspaper clipping of the discovery of a mastodon in a local barnyard': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_05.png'),
 		'Dr. Dan Fisher displays a mastodon jawbone.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_06.png'),
+		'A map of the mastodon trackway.': require('../../../../assets/img/galleries/Mastodons/Gallery_Mastodons_07.png'),
 	},
 	isLastStop: false 
 }
