@@ -35,7 +35,7 @@ export default class HightlightsTourPreview extends React.Component {
 						{/*Upper Area*/}
 							<View style = { styles.upperContent }>
 								<View style = { styles.heroImageContainer }>
-									<Image style = { styles.heroImage } source = {require('../assets/img/HeroImage_Doli.png')} resizeMode = "contain" />
+									<Image style = { styles.heroImage } source = {{uri: 'http://drive.google.com/uc?export=view&id=1yW3qtC5cLYkgptEp8_zW-WTDdsSaX5z6', cache: 'force-cache'}} resizeMode = "contain" />
 								</View>
 								<View style = { styles.descriptionContainer }>
 									<Text style = { styles.header }>Self-Guided Highlights Tour</Text>

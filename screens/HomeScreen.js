@@ -8,7 +8,6 @@ import preventDoubleClick from '../utils/preventDoubleClick'
 
 const ButtonEx = preventDoubleClick(Button)
 
-
 export default class HomeScreen extends React.Component {
 	static navigationOptions = {
 		title: "Home",
@@ -36,11 +35,10 @@ export default class HomeScreen extends React.Component {
   	render() {
   	  return (
   	  	<View style={styles.container}>
-    		  <ImageBackground style = { styles.backgroundImage } source = {require('../assets/img/home_background.png')}> 
+    		  <ImageBackground style = { styles.backgroundImage } source = {{uri: 'https://firebasestorage.googleapis.com/v0/b/ummnh-app.appspot.com/o/home_background.png?alt=media&token=b18b5fff-2cf9-48f8-a099-25a6d4040bba'}}> 
           <SafeAreaView style = { styles.safeAreaView }>
     		    <View style = {styles.menuContainer}>
               <View style = { styles.welcomeMessageContainer }>
-                {/*<View style = { styles.bigWords }>*/}
                   <View style = { styles.bigWordsInnerContainer}>
                     <Text style = { [styles.bigWordsText, styles.bigBig] }>Welcome</Text>
                     <Text style = { [styles.bigWordsText, styles.bigNormal]}>to the brand new</Text>
@@ -48,9 +46,7 @@ export default class HomeScreen extends React.Component {
                     <Text style = { [styles.bigWordsText, styles.bigBig] }>Museum of</Text>
                     <Text style = { [styles.bigWordsText, styles.bigBig] }>Natural History</Text>
                   </View>
-                {/* </View> */}
                 <View style = { styles.smallWords }>
-                    {/*<View style = { styles.smallWordsInnerContainer }>*/}
                       <Text style = { [styles.smallWordsText, styles.smallNormal] }>We celebrated our grand opening on</Text>
                       <Text style = { [styles.smallWordsText, styles.smallBold] }>April 14th, 2019</Text>
 
@@ -60,9 +56,7 @@ export default class HomeScreen extends React.Component {
 
                       <Text style = { [styles.smallWordsText, styles.smallNormal] }>There will be more to see, do, and</Text>
                       <Text style = { [styles.smallWordsText, styles.smallBold] }>discover!</Text>
-                  {/*</View>*/}
                 </View>
-                {/* <Image source = { require('../assets/img/home_message.png') } style = { styles.welcomeMessageImage }/> */}
               </View>
               
     		      <View style = {styles.buttonContainer}>

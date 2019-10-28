@@ -155,13 +155,38 @@ export default class App extends React.Component {
     ])
 
     const imageAssets = cacheImages([
-      require('./assets/img/home_message.png'),
-      require('./assets/img/home_background.png'),
-      require('./assets/img/HeroImage_Doli.png'),
+      //require('./assets/img/home_background.png'),
+      //require('./assets/img/HeroImage_Doli.png'),
+
+      //Home Background
+      'https://firebasestorage.googleapis.com/v0/b/ummnh-app.appspot.com/o/home_background.png?alt=media&token=b18b5fff-2cf9-48f8-a099-25a6d4040bba',
 
       //Hero Images
+        //Mastodons
+        'https://drive.google.com/file/d/1ym9y6gE6FncG2CxaULAqhK46uUjf4AZF/view?usp=sharing',
+        //Fossil Prep Lab
+        'https://drive.google.com/file/d/1YQLHJUwd9-nF2TmtTFpouJLnZ9yXTaBh/view?usp=sharing',
+        //Tree of Life
+        'https://drive.google.com/file/d/1gsxLSGDYMx90MK8bfWy54HnsgxTN9d-i/view?usp=sharing',
+        //Evolution
+        'https://drive.google.com/file/d/1Zs9lICSIrM48cWIClpqWCb_Ne7G7lRLO/view?usp=sharing',
+        //Whales
+        'https://drive.google.com/file/d/1JPCZ0Xc-rU_ahlwelFPArUy-J27DKCSx/view?usp=sharing',
+        //Majungasaurus
+        'https://drive.google.com/file/d/18lvoz5pbA9JOcCgDEDoQ1uXGZBlNUXKP/view?usp=sharing',
+        //Doli
+        'http://drive.google.com/uc?export=view&id=1yW3qtC5cLYkgptEp8_zW-WTDdsSaX5z6',
+        //Sediba
+        'https://drive.google.com/file/d/1B1lCwxEhWYeXRVPrtLK5X-NyIVSYZZMa/view?usp=sharing',
+        //Quetz
+        'https://drive.google.com/file/d/1ofxaZVgO_6L45bdFHKp3byFav5L24ojm/view?usp=sharing',
+        //Dynamic Planet
+        'https://drive.google.com/file/d/1C8xS5dpEMSPiyvVdyIU9SG-2nlozwz2w/view?usp=sharing',
 
       //Gallery Images
+        //Doli
+          //1
+          'https://drive.google.com/open?id=1cG-0HtzEXPfusDWRnPS0kk1n7JV10qh2',
 
       //Navigation Images
     ])
