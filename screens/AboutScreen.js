@@ -54,9 +54,9 @@ export default class AboutScreen extends React.Component {
 					<View style = {styles.mainContainer}>
 						<View style = { styles.textContainer }>
 							<Text style = { styles.sectionHeader }>Version 2.0</Text>
-							<Text style = {styles.sectionContent}>-Rebuilt with React Native</Text>
-							<Text style = {styles.sectionContent}>-Multi-platform. Now available on iOS and Android!</Text>
-							<Text style = {styles.sectionContent}>-Added new gallery content</Text>
+							<Text style = {styles.sectionContent}>-New gallery content!</Text>
+							<Text style = {styles.sectionContent}>-More ways to plan your visit to the museum!</Text>
+							<Text style = {styles.sectionContent}>-Over-the-air updates keep your app up to date without you having to update!</Text>
 		
 							<Text style = { styles.sectionHeader }>About the App</Text>
 							<Text style = {styles.sectionContent}>Welcome to the University of Michigan Museum of Natural History app! Our app will help you enjoy and interact with the museum on a deeper level.</Text>

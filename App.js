@@ -158,6 +158,12 @@ export default class App extends React.Component {
       require('./assets/img/home_message.png'),
       require('./assets/img/home_background.png'),
       require('./assets/img/HeroImage_Doli.png'),
+
+      //Hero Images
+
+      //Gallery Images
+
+      //Navigation Images
     ])
 
     await Promise.all([...fontAssets, ...imageAssets])
