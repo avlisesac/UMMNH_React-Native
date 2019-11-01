@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		aspectRatio: 1920/1080,
 		overflow: 'hidden',
-		backgroundColor: 'grey'
+		//backgroundColor: 'grey'
 	},
 	buttonText: {
 		fontSize: 65,

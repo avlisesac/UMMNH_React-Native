@@ -7,6 +7,7 @@ import styles from '../stylesheets/TourStopScreen'
 import fontSizes from '../utils/FontSizes'
 import colors from '../utils/Colors'
 import BodyCopy from '../components/BodyCopy'
+import CachedImage from '../components/CachedImage'
 import LoadingIndicator from '../components/LoadingIndicator'
 import heroImages from '../utils/HeroImages'
 import audioFiles from '../utils/AudioFiles'
@@ -143,7 +144,7 @@ export default class TourStopScreen extends React.Component{
 					<View style = { styles.view }>
 						<View style = { styles.mainContainer }>
 							<View style = { styles.heroHolder }>
-								<Image style = { styles.heroImage } source = { this.state.heroImage }/>
+								<CachedImage image = { this.state.heroImage } resizeMode = 'contain' />								
 								<ButtonEx
 									title = "Image Gallery"
 									buttonStyle = { styles.imageGalleryButtonStyle }

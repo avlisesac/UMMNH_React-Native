@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Animated, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { Animated, StyleSheet, Text, View, Dimensions, ActivityIndicator } from 'react-native';
+import CachedImage from '../components/CachedImage'
+import { Asset } from 'expo'
 
 import {
   PanGestureHandler,
@@ -8,13 +10,26 @@ import {
   State,
 } from 'react-native-gesture-handler';
 
+
+const AnimatedCachedImage = Animated.createAnimatedComponent(CachedImage)
+
 export class PinchableImage extends React.Component {
 
   panRef = React.createRef();
   pinchRef = React.createRef();
 
+  
+
+  state = {
+    imageLoaded: false
+  }
+
+  componentDidMount(){
+  }
+
   constructor(props) {
     super(props);
+    
 
     let { width } = Dimensions.get('window')
 
@@ -52,8 +67,10 @@ export class PinchableImage extends React.Component {
       this._lastScale *= event.nativeEvent.scale;
       this._baseScale.setValue(this._lastScale);
       this._pinchScale.setValue(1);
+
+      
     }
-  };
+  }
 
   _onPanHandlerStateChange = event => {
   	if (event.nativeEvent.oldState === State.ACTIVE){
@@ -84,19 +101,10 @@ export class PinchableImage extends React.Component {
     					onHandlerStateChange = { this._onPanHandlerStateChange }>
 
     					<Animated.View style = { styles.container } collapsable = { false }>
-    						<Animated.Image
-    							style = {[
-    								styles.thisImage,
-    								{
-    									transform: [
-    										{ scale: this._scale },
-    										{ translateX: Animated.divide(this._translateX, this._scale) },
-    										{ translateY: Animated.divide(this._translateY, this._scale) },
-    									]
-    								}
-    							]}
-    							source = { this.props.image }
-    						/>
+                <Animated.View style = {[ styles.thisImage, { transform: [ { scale: this._scale}, {translateX: Animated.divide(this._translateX, this._scale)}, {translateY: Animated.divide(this._translateY, this._scale)}]}]}>
+                  <CachedImage image = { this.props.image } resizeMode = 'contain'/>
+                </Animated.View>
+                
     					</Animated.View>
     				</PanGestureHandler>
     			</Animated.View>
@@ -133,4 +141,10 @@ const styles = StyleSheet.create({
     	width: '100%',
     	backgroundColor: 'purple'
   	},
+    loadingStyle: {
+      flex: 1,
+      alignSelf: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
 });

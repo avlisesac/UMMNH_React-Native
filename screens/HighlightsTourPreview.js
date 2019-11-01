@@ -8,6 +8,7 @@ import colors from '../utils/Colors'
 import fontSizes from '../utils/FontSizes'
 import preventDoubleClick from '../utils/preventDoubleClick'
 import BodyCopy from '../components/BodyCopy'
+import CachedImage from '../components/CachedImage'
 
 const ButtonEx = preventDoubleClick(Button)
 
@@ -35,7 +36,8 @@ export default class HightlightsTourPreview extends React.Component {
 						{/*Upper Area*/}
 							<View style = { styles.upperContent }>
 								<View style = { styles.heroImageContainer }>
-									<Image style = { styles.heroImage } source = {require('../assets/img/HeroImage_Doli.png')} resizeMode = "contain" />
+									<CachedImage image = { require('../assets/img/HeroImage_Doli.png') } resizeMode = 'contain' />
+									
 								</View>
 								<View style = { styles.descriptionContainer }>
 									<Text style = { styles.header }>Self-Guided Highlights Tour</Text>

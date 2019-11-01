@@ -4,7 +4,7 @@ import { ActivityIndicator, StyleSheet } from 'react-native'
 export default class LoadingIndicator extends React.Component{
 	render(){
 		return(
-			<ActivityIndicator style = { styles.loader } size = 'large' />
+			<ActivityIndicator style = { styles.loader } size = 'large' color='#00b6f1'/>
 		)
 	}
 }

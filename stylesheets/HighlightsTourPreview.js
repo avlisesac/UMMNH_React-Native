@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 	heroImageContainer: {
 		width: '100%',
 		aspectRatio: 1920/1080,
-		backgroundColor: 'grey'
+		//backgroundColor: 'grey'
 	},
 	heroImage: {
 		flex: 1,

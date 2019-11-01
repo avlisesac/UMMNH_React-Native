@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, View, Image, SafeAreaView, ScrollView } from 'react-native'
+import { Text, StyleSheet, View, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { StackActions } from 'react-navigation'
@@ -9,6 +9,7 @@ import styles from '../stylesheets/TourNavigationScreen'
 import Swiper from 'react-native-swiper'
 import BodyCopy from '../components/BodyCopy'
 import LoadingIndicator from '../components/LoadingIndicator'
+import CachedImage from '../components/CachedImage'
 import navigationImages from '../utils/NavigationImages'
 import navScreenData from '../utils/NavScreenData'
 import preventDoubleClick from '../utils/preventDoubleClick'
@@ -100,8 +101,8 @@ class TourNavigationScreen extends React.Component {
 							<View style = { styles.upperArea }>
 								<View style = { styles.swipeContainer }>
 									<Swiper style = { styles.wrapper } showsButtons = { true } activeDotColor = { 'white' } nextButton = { <Text style={styles.buttonText}>›</Text> } prevButton = { <Text style={styles.buttonText}>‹</Text>} >
-										<Image style = { styles.navImage } source = { this.state.navImage_1 }/>
-										<Image style = { styles.navImage } source = { this.state.navImage_2 }/>
+										<CachedImage image = { this.state.navImage_1 } resizeMode = 'contain' />
+										<CachedImage image = { this.state.navImage_2 } resizeMode = 'contain' />
 									</Swiper>
 								</View>
 
